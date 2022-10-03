@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">MySplash</string>
+    <string name="label1">Contraseña</string>
+    <string name="label2">Name</string>
+    <string name="label3">Usuario</string>
+    <string name="label4">Inicio de sesión</string>
+    <string name="label5">Registrarse</string>
+    <string name="boton1">Olvide contraseña</string>
+    <string name="boton2">Accesar</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+
+    <string name="register_main">Registro</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="corr">Correo</string>
+    <string name="batiz">¿Eres batiziano?</string>
+    <string name="sig1">Continuar</string>
+
+    <string name="eje">Correo example</string>
+    <string name="man">Hombre</string>
+    <string name="wom">Mujer</string>
+    <string name="gen">Género</string>
+    <string name="not">¿Notificaciones?</string>
+
+
+</resources>
