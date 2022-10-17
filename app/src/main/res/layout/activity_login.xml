@@ -14,6 +14,7 @@
         android:layout_height="52dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:background="@color/fog"
         android:minHeight="48dp"
         android:hint="@string/label2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,6 +30,7 @@
         android:layout_height="53dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:background="@color/fog"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,28 +71,28 @@
         android:id="@+id/accesarid"
         android:layout_width="123dp"
         android:layout_height="75dp"
-        android:backgroundTint="#0864AE"
+        android:backgroundTint="#1a579f"
         android:text="@string/boton2"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cornerRadius="10dp"
         app:layout_constraintVertical_bias="0.748" />
 
     <Button
         android:id="@+id/olvidoid"
         android:layout_width="155dp"
         android:layout_height="75dp"
-        android:backgroundTint="#9F1313"
+        android:backgroundTint="#800317"
         android:text="@string/boton1"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cornerRadius="10dp"
         app:layout_constraintVertical_bias="0.748" />
 
     <TextView
@@ -112,14 +114,14 @@
         android:id="@+id/registroid"
         android:layout_width="155dp"
         android:layout_height="75dp"
-        android:backgroundTint="#0864AE"
+        android:backgroundTint="#1a579f"
         android:text="@string/label5"
+        app:cornerRadius="10dp"
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cornerRadius="10dp"
         app:layout_constraintVertical_bias="0.879" />
 
     <ImageView

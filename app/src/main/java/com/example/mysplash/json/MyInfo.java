@@ -3,35 +3,94 @@ package com.example.mysplash.json;
 import java.io.Serializable;
 
 public class MyInfo implements Serializable {
-    private String usuario;
-    private String password;
+    private String user;
     private String correo;
-    private Boolean sexo;
-    public MyInfo() {
+    private String contrasena;
+    private String numero;
+    private String fecha;
+    private String edad;
+    private String[] escuela;
+    private Boolean gen;
+    private Boolean notifi;
+    private Boolean feliz;
+
+    public String getUser() {
+        return user;
     }
-    public String getUsuario() {
-        return usuario;
+
+    public void setUser(String user) {
+        this.user = user;
     }
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
     public String getCorreo() {
         return correo;
     }
+
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    public Boolean getSexo() {
-        return sexo;
-    }
-    public void setSexo(Boolean sexo) {
-        this.sexo = sexo;
+
+    public String getContrasena() {
+        return contrasena;
     }
 
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getEdad() {
+        return edad;
+    }
+
+    public void setEdad(String edad) {
+        this.edad = edad;
+    }
+
+    public String[] getEscuela() {
+        return escuela;
+    }
+
+    public void setEscuela(String[] escuela) {
+        this.escuela = escuela;
+    }
+
+    public Boolean getGen() {
+        return gen;
+    }
+
+    public void setGen(Boolean gen) {
+        this.gen = gen;
+    }
+
+    public Boolean getNotifi() {
+        return notifi;
+    }
+
+    public void setNotifi(Boolean notifi) {
+        this.notifi = notifi;
+    }
+
+    public Boolean getFeliz() {
+        return feliz;
+    }
+
+    public void setFeliz(Boolean feliz) {
+        this.feliz = feliz;
+    }
 }

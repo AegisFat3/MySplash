@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="steam">#cbcfde</color>
+    <color name="fog">#d9d4d4</color>
+    <color name="blue2">#101C3E</color>
 </resources>

@@ -29,5 +29,15 @@
     <string name="gen">Género</string>
     <string name="not">¿Notificaciones?</string>
 
+    <string name="num">Número</string>
+    <string name="fec">Fecha</string>
+    <string name="eda">Edad</string>
+    <string name="pol">¿Eres politécnico?</string>
+    <string name="fel">¿Eres feliz?</string>
+    <string name="emp">By: Technoswamp</string>
+    <string name="res">Recuperar</string>
+    <string name="mu">Menu</string>
+    <string name="xd">Proximamente...</string>
+
 
 </resources>
