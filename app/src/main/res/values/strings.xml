@@ -36,8 +36,9 @@
     <string name="fel">¿Eres feliz?</string>
     <string name="emp">By: Technoswamp</string>
     <string name="res">Recuperar</string>
-    <string name="mu">Menu</string>
-    <string name="xd">Proximamente...</string>
+    <string name="mu">Menú</string>
+    <string name="xd">Empty</string>
+    <string name="bienvenido_label">¡Bienvenido!</string>
 
 
 </resources>

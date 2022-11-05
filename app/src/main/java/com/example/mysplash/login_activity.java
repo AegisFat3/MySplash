@@ -133,6 +133,7 @@ public class login_activity extends AppCompatActivity {
             for(MyInfo myInfo : list){
                 if(myInfo.getUser().equals(usr)&&myInfo.getContrasena().equals(pswd)){
                     Intent intent = new Intent(login_activity.this, principal.class);
+                    intent.putExtra("MyInfo", myInfo);
                     startActivity(intent);
                     i=1;
                 }
