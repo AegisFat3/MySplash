@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-
 public class login_activity extends AppCompatActivity {
     public static List<MyInfo> list;
     public static String TAG = "mensaje";
