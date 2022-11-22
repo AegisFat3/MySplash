@@ -1,9 +1,13 @@
 package com.example.mysplash;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -19,9 +23,9 @@ import java.util.List;
 
 public class principal extends AppCompatActivity {
     private ListView listView;
-    private List<MyData> list;
+    private List<MyData> lista;
     private TextView user;
-    private int []imagen = { R.drawable.steam,R.drawable.origin,R.drawable.battle,R.drawable.epicgames};
+     int []images = { R.drawable.steam,R.drawable.origin,R.drawable.battle,R.drawable.epicgames};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,40 +37,9 @@ public class principal extends AppCompatActivity {
         Object object = null;
         user = findViewById(R.id.presId);
         listView = (ListView) findViewById(R.id.listViewId);
-        list = new ArrayList<MyData>();
+        lista = new ArrayList<MyData>();
         Intent intent = getIntent();
 
-        for( int i = 0; i < 4; i++)
-        {
-            myData = new MyData();
-            myData.setContra( String.format( "Contraseña: %d" , (int)(Math.random()*10000) ) );
-            if(i==0){
-                myData.setRed(String.format( "Steam"));
-                myData.setImage(imagen[0]);
-            }
-            if(i==1){
-                myData.setRed(String.format( "Origin"));
-                myData.setImage(imagen[1]);
-            }
-            if(i==2){
-                myData.setRed(String.format( "Battle" ));
-                myData.setImage(imagen[2]);
-            }
-            if(i==3){
-                myData.setRed(String.format( "Epic" ));
-                myData.setImage(imagen[3]);
-            }
-            list.add( myData );
-        }
-        MyAdapter myAdapter = new MyAdapter( list , getBaseContext() );
-        listView.setAdapter(myAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-                toast( i );
-            }
-        });
         if( intent != null)
         {
             aux = intent.getStringExtra("Usuario" );
@@ -85,9 +58,48 @@ public class principal extends AppCompatActivity {
             }
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        boolean flag = false;
+        flag = super.onCreateOptionsMenu(menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu ,  menu);
+        return flag;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        MyInfo info = null;
+        Object object = null;
+        Intent intent = getIntent();
+        object = intent.getExtras().get("MyInfo");
+        info = (MyInfo) object;
+        switch (item.getItemId() ) {
+            case R.id.agregarId:
+                Intent olvideContra = new Intent(principal.this, Add.class);
+                olvideContra.putExtra("MyInfo", info);
+                startActivity(olvideContra);
+                break;
+            case R.id.elimId:
+                Intent elimContra = new Intent(principal.this, Delete.class);
+                elimContra.putExtra("MyInfo", info);
+                startActivity(elimContra);
+                break;
+            case R.id.editarId:
+                Intent editaContra = new Intent(principal.this, Edit.class);
+                editaContra.putExtra("MyInfo", info);
+                startActivity(editaContra);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return false;
+    }
     private void toast( int i )
     {
-        Toast.makeText(getBaseContext(), list.get(i).getContra(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), lista.get(i).getContra(), Toast.LENGTH_SHORT).show();
     }
 
     }

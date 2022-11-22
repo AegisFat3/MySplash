@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/agregarId"
+        android:icon="@drawable/add"
+        android:title="@string/add_label" />
+    <item
+        android:id="@+id/elimId"
+        android:icon="@drawable/plus"
+        android:title="@string/del_label" />
+    <item
+        android:id="@+id/editarId"
+        android:icon="@drawable/edit"
+        android:title="@string/mod_label" />
+</menu>

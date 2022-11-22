@@ -27,18 +27,5 @@
         android:layout_weight="1"
         android:text="TextView" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="1dp"
-        android:layout_height="25dp"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/plus" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="1dp"
-        android:layout_height="25dp"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/edit" />
 
 </LinearLayout>

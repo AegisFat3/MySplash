@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.ToggleButton;
 import android.widget.Switch;
+
 import android.widget.Toast;
 import androidx.core.util.PatternsCompat;
 import android.content.Intent;
@@ -15,6 +16,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+
+
+import com.example.mysplash.json.MyData;
 import com.example.mysplash.json.MyInfo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -45,6 +49,9 @@ public class registro extends AppCompatActivity{
     public static boolean tog= false;
     public static boolean on;
     public static String[] chec = new String[2];
+    List<MyData> lista = new ArrayList<>();
+    int []images = { R.drawable.origin,R.drawable.steam,R.drawable.epicgames, R.drawable.battle, R.drawable.xbox,
+            R.drawable.ps, R.drawable.nins, R.drawable.uplay, R.drawable.gogcom, R.drawable.stadia};
     public static List<MyInfo> list =new ArrayList<MyInfo>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +117,30 @@ public class registro extends AppCompatActivity{
                 if(togglebutton1.isChecked()){
                     tog= true;
                 }
+                MyData myData = null;
+                for( int i = 0; i < 4; i++)
+                {
+                    myData = new MyData();
+                    myData.setContra( String.format( "Contraseña: %d" , (int)(Math.random()*10000) ) );
+                    if(i==0){
+                        myData.setRed(String.format( "Steam"));
+                        myData.setImage(images[0]);
+                    }
+                    if(i==1){
+                        myData.setRed(String.format( "Origin"));
+                        myData.setImage(images[1]);
+                    }
+                    if(i==2){
+                        myData.setRed(String.format( "Battle" ));
+                        myData.setImage(images[2]);
+                    }
+                    if(i==3){
+                        myData.setRed(String.format( "Epic" ));
+                        myData.setImage(images[3]);
+                    }
+                    lista.add(myData);
+                }
+
 
                 if(usu.equals("")||password.equals("")||ecor.equals("")){
                     Log.d(TAG,"vacio");
@@ -138,6 +169,8 @@ public class registro extends AppCompatActivity{
 
                 }
             }
+
+
         });
     }
     public void List2Json(MyInfo info,List<MyInfo> list){
@@ -228,4 +261,5 @@ public class registro extends AppCompatActivity{
             return;
         }
     }
+
 }

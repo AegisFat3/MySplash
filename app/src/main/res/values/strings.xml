@@ -41,5 +41,16 @@
     <string name="bienvenido_label">¡Bienvenido!</string>
     <string name="contra">Contraseñas de sitios:</string>
 
+    <string name="add_label">Añadir</string>
+    <string name="del_label">Eliminar</string>
+    <string name="mod_label">Modificar</string>
+
+    <string name="Agregar">Añadir</string>
+    <string name="ne">Nueva contraseña</string>
+    <string name="plataforma">Plataforma</string>
+    <string name="ADV">Presiona la contraseña a eliminar</string>
+    <string name="r">Listo</string>
+    <string name="c">Concluir</string>
+
 
 </resources>
