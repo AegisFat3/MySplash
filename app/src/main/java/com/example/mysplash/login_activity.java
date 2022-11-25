@@ -19,14 +19,32 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.mysplash.des.MyDesUtil;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 
 public class login_activity extends AppCompatActivity {
+
+    public static final String KEY = "+4xij6jQRSBdCymMxweza/uMYo+o0EUg";
+    private String testClaro = "Mi texto de ejemplo";
+    private String testDesCifrado;
+    public String correo;
+    public String mensaje;
+    public static String TOG = "error";
     public static List<MyInfo> list;
     public static String TAG = "mensaje";
     public static String json = null;
     public static String persona,pass;
     private Button button1, button2, button3;
+    public MyDesUtil myDesUtil= new MyDesUtil().addStringKeyBase64(KEY);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +64,7 @@ public class login_activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 persona = String.valueOf(user.getText());
-                pass = String.valueOf(contra.getText())+ persona;
-                pass = Cluster.bytesToHex(Cluster.createSha1(pass));
+                pass = String.valueOf(contra.getText());
                 acceso(persona , pass);
             }
         });
@@ -61,14 +78,8 @@ public class login_activity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                persona = String.valueOf(user.getText());
-                pass = Cluster.bytesToHex(Cluster.createSha1(String.valueOf(contra.getText())));
-                if(persona.equals("")||pass.equals("")){
-                    Toast.makeText(getApplicationContext(), "Completa los apartados", Toast.LENGTH_LONG).show();
-                }else{
-                    Intent intent = new Intent(login_activity.this,olvidar.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(login_activity.this, olvidar.class);
+                startActivity(intent);
             }
         });
     }
@@ -84,6 +95,7 @@ public class login_activity extends AppCompatActivity {
             fileInputStream = new FileInputStream(file);
             fileInputStream.read(bytes);
             json=new String(bytes);
+            json= myDesUtil.desCifrar(json);
             Log.d(TAG,json);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -132,7 +144,7 @@ public class login_activity extends AppCompatActivity {
             for(MyInfo myInfo : list){
                 if(myInfo.getUser().equals(usr)&&myInfo.getContrasena().equals(pswd)){
                     Intent intent = new Intent(login_activity.this, principal.class);
-                    intent.putExtra("MyInfo", myInfo);
+                    intent.putExtra("Objeto", myInfo);
                     startActivity(intent);
                     i=1;
                 }
@@ -142,12 +154,5 @@ public class login_activity extends AppCompatActivity {
             }
         }
     }
-    public void olvidar_contrasena(String usr, String pswd){
-        if(usr.equals("")||pswd.equals("")){
-            Toast.makeText(getApplicationContext(), "Completa los apartados", Toast.LENGTH_LONG).show();
-        }else{
-            Intent intent = new Intent(login_activity.this,olvidar.class);
-            startActivity(intent);
-        }
-    }
+
 }

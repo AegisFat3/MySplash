@@ -1,6 +1,12 @@
 package com.example.mysplash.json;
 
-public class MyData {
+import java.io.Serializable;
+
+public class MyData implements Serializable {
+    private String contra;
+    private int image;
+    private String usuario;
+
     public String getContra() {
         return contra;
     }
@@ -17,16 +23,11 @@ public class MyData {
         this.image = image;
     }
 
-    private String contra;
-    private int image;
-
-    public String getRed() {
-        return red;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setRed(String red) {
-        this.red = red;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
-
-    private String red;
 }

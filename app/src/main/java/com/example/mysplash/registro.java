@@ -6,7 +6,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.ToggleButton;
 import android.widget.Switch;
-
+import com.example.mysplash.des.MyDesUtil;
+import com.example.mysplash.json.MyData;
 import android.widget.Toast;
 import androidx.core.util.PatternsCompat;
 import android.content.Intent;
@@ -42,22 +43,23 @@ public class registro extends AppCompatActivity{
     private CheckBox chec1, chec2;
     private Switch switch1;
     private static final String TAG = "MainActivity";
-    public static final String archivo = "archivo.json";
+    public static final String archivo = "Br.json";
     String json = null;
     public static String usu,password,ecor,tel,dat,ed;
     public static boolean sw= false;
     public static boolean tog= false;
     public static boolean on;
     public static String[] chec = new String[2];
-    List<MyData> lista = new ArrayList<>();
-    int []images = { R.drawable.origin,R.drawable.steam,R.drawable.epicgames, R.drawable.battle, R.drawable.xbox,
-            R.drawable.ps, R.drawable.nins, R.drawable.uplay, R.drawable.gogcom, R.drawable.stadia};
     public static List<MyInfo> list =new ArrayList<MyInfo>();
+    public static List<MyData> lista;
+    public static final String KEY = "+4xij6jQRSBdCymMxweza/uMYo+o0EUg";
+    public MyDesUtil myDesUtil= new MyDesUtil().addStringKeyBase64(KEY);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-
+        lista= new ArrayList<>();
+        MyData myData=null;
 
         conti = findViewById(R.id.continuarlogid);
         Button inicio = findViewById(R.id.inicio);
@@ -117,29 +119,6 @@ public class registro extends AppCompatActivity{
                 if(togglebutton1.isChecked()){
                     tog= true;
                 }
-                MyData myData = null;
-                for( int i = 0; i < 4; i++)
-                {
-                    myData = new MyData();
-                    myData.setContra( String.format( "Contraseña: %d" , (int)(Math.random()*10000) ) );
-                    if(i==0){
-                        myData.setRed(String.format( "Steam"));
-                        myData.setImage(images[0]);
-                    }
-                    if(i==1){
-                        myData.setRed(String.format( "Origin"));
-                        myData.setImage(images[1]);
-                    }
-                    if(i==2){
-                        myData.setRed(String.format( "Battle" ));
-                        myData.setImage(images[2]);
-                    }
-                    if(i==3){
-                        myData.setRed(String.format( "Epic" ));
-                        myData.setImage(images[3]);
-                    }
-                    lista.add(myData);
-                }
 
 
                 if(usu.equals("")||password.equals("")||ecor.equals("")){
@@ -160,6 +139,7 @@ public class registro extends AppCompatActivity{
                                 Toast.makeText(getApplicationContext(), "enserio, ¿Tienen la misma edad?", Toast.LENGTH_LONG).show();
                             }else{
                                 Cluster.fillInfo(info);
+                                info.setContras(lista);
                                 List2Json(info,list);
                             }
                         }
@@ -185,6 +165,8 @@ public class registro extends AppCompatActivity{
         }
         else
         {
+            Log.d(TAG, json);
+            json=myDesUtil.cifrar(json);
             Log.d(TAG, json);
             writeFile(json);
         }
@@ -226,6 +208,7 @@ public class registro extends AppCompatActivity{
             fileInputStream = new FileInputStream(file);
             fileInputStream.read(bytes);
             json=new String(bytes);
+            json= myDesUtil.desCifrar(json);
             Log.d(TAG,json);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

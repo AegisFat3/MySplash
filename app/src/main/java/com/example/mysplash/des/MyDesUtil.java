@@ -2,14 +2,9 @@ package com.example.mysplash.des;
 
 import android.util.Base64;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -17,15 +12,9 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import static javax.crypto.Cipher.ENCRYPT_MODE;
-import static javax.crypto.Cipher.getInstance;
-
-public class MyDesUtil implements Serializable
-{
+public class MyDesUtil {
     public static String PROVIDER = "DESede/ECB/PKCS7Padding";
     public static String ALGORITHM =  "DESede";
     private String stringKeyBase64;

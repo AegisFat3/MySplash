@@ -1,6 +1,7 @@
 package com.example.mysplash.json;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyInfo implements Serializable {
@@ -14,7 +15,7 @@ public class MyInfo implements Serializable {
     private Boolean gen;
     private Boolean notifi;
     private Boolean feliz;
-    private List<MyData> contras;
+    private List<MyData> contras= new ArrayList<>();
 
     public List<MyData> getContras() {
         return contras;
@@ -23,6 +24,7 @@ public class MyInfo implements Serializable {
     public void setContras(List<MyData> contras) {
         this.contras = contras;
     }
+
 
 
     public String getUser() {

@@ -1,15 +1,19 @@
 package com.example.mysplash.MyAdapter;
 
-import android.widget.BaseAdapter;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.mysplash.R;
 
+import com.example.mysplash.R;
 import com.example.mysplash.json.MyData;
+
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,7 +22,7 @@ public class MyAdapter extends BaseAdapter implements Serializable {
     private List<MyData> list;
     private Context context;
     private LayoutInflater layoutInflater;
-
+    public static String TAG="Hi";
     public MyAdapter(List<MyData> list, Context context)
     {
         this.list = list;
@@ -63,16 +67,14 @@ public class MyAdapter extends BaseAdapter implements Serializable {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup)
     {
-        TextView textView = null;
-        TextView textView2 = null;
+        TextView textView= null;
+        TextView textView1= null;
         ImageView imageView = null;
         view = layoutInflater.inflate(R.layout.activity_list_view, null );
-        textView = view.findViewById(R.id.textViewId2);
-        textView2 = view.findViewById(R.id.textViewId1);
-        textView.setText(list.get(i).getContra());
-        textView2.setText(list.get(i).getRed());
-        imageView = view.findViewById(R.id.imageView5);
-        imageView.setImageResource(list.get(i).getImage());
+        textView= view.findViewById(R.id.textViewU);
+        textView1=view.findViewById(R.id.textViewC);
+        textView1.setText(String.valueOf(list.get(i).getContra()));
+        textView.setText(String.valueOf(list.get(i).getUsuario()));
         return view;
     }
 }

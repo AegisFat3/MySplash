@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item1"
+        android:title="Agregar nueva contraseña"
+        />
+    <item
+        android:id="@+id/item2"
+        android:title="Guardar" />
+    <item
+        android:id="@+id/item3"
+        android:title="Cerrar Sesión" />
 
-    <item
-        android:id="@+id/agregarId"
-        android:icon="@drawable/add"
-        android:title="@string/add_label" />
-    <item
-        android:id="@+id/elimId"
-        android:icon="@drawable/plus"
-        android:title="@string/del_label" />
-    <item
-        android:id="@+id/editarId"
-        android:icon="@drawable/edit"
-        android:title="@string/mod_label" />
+
 </menu>
