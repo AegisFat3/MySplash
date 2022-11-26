@@ -43,7 +43,7 @@ public class registro extends AppCompatActivity{
     private CheckBox chec1, chec2;
     private Switch switch1;
     private static final String TAG = "MainActivity";
-    public static final String archivo = "Br.json";
+    public static final String archivo = "S.json";
     String json = null;
     public static String usu,password,ecor,tel,dat,ed;
     public static boolean sw= false;

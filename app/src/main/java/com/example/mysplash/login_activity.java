@@ -2,16 +2,6 @@ package com.example.mysplash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mysplash.json.MyInfo;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,8 +17,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysplash.des.MyDesUtil;
+import com.example.mysplash.json.MyInfo;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -38,8 +41,9 @@ public class login_activity extends AppCompatActivity {
     private String testDesCifrado;
     public String correo;
     public String mensaje;
-    public static String TOG = "error";
     public static List<MyInfo> list;
+    public static String TOG = "error";
+
     public static String TAG = "mensaje";
     public static String json = null;
     public static String persona,pass;
@@ -154,5 +158,4 @@ public class login_activity extends AppCompatActivity {
             }
         }
     }
-
 }

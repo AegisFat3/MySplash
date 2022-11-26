@@ -17,10 +17,10 @@ import javax.crypto.spec.SecretKeySpec;
 public class MyDesUtil {
     public static String PROVIDER = "DESede/ECB/PKCS7Padding";
     public static String ALGORITHM =  "DESede";
-    private static String stringKeyBase64;
-    private static Cipher cipherCifrar;
-    private static Cipher cipherDesCifrar;
-    private static SecretKey secretKey;
+    private String stringKeyBase64;
+    private Cipher cipherCifrar;
+    private Cipher cipherDesCifrar;
+    private SecretKey secretKey;
 
     public MyDesUtil()
     {
@@ -37,7 +37,7 @@ public class MyDesUtil {
         return this;
     }
 
-    public static boolean loadCipher(MODO modo)
+    public boolean loadCipher( MODO modo )
     {
         Cipher cipher = null;
         try
@@ -90,7 +90,7 @@ public class MyDesUtil {
         return false;
     }
 
-    public static String cifrar(String textoEnClaro)
+    public String cifrar( String textoEnClaro )
     {
         byte[] bytes = null;
         byte[] bytesCifrados = null;
@@ -157,7 +157,7 @@ public class MyDesUtil {
         return null;
     }
 
-    public static boolean loadSecreteKey()
+    public boolean loadSecreteKey(  )
     {
         try
         {
@@ -171,7 +171,7 @@ public class MyDesUtil {
         return false;
     }
 
-    public static boolean loadSecreteKeyByStringKey()
+    public boolean loadSecreteKeyByStringKey( )
     {
         byte[] bytes = null;
         bytes = Base64.decode( stringKeyBase64 , Base64.DEFAULT);

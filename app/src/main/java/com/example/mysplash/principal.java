@@ -31,6 +31,7 @@ import com.google.gson.Gson;
 
 public class principal extends AppCompatActivity {
     private List<MyInfo> list;
+    public MyDesUtil myDesUtil= new MyDesUtil().addStringKeyBase64(registro.KEY);
     public static String TAG = "mensaje";
     public static String json = null;
     private ListView listView;
@@ -205,7 +206,7 @@ public class principal extends AppCompatActivity {
         else
         {
             Log.d(TAG, json);
-            json = MyDesUtil.cifrar(json);
+            json = myDesUtil.cifrar(json);
             Log.d(TAG, json);
             writeFile(json);
         }
