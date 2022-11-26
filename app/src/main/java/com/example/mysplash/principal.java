@@ -3,6 +3,13 @@ package com.example.mysplash;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,29 +18,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.mysplash.MyAdapter.MyAdapter;
 import com.example.mysplash.des.MyDesUtil;
 import com.example.mysplash.json.MyData;
 import com.example.mysplash.json.MyInfo;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 public class principal extends AppCompatActivity {
     private List<MyInfo> list;
@@ -41,10 +35,10 @@ public class principal extends AppCompatActivity {
     public static String json = null;
     private ListView listView;
     private List<MyData> listo;
-    String aux;
     public boolean bandera = false;
     public int pos=0;
     public static MyInfo myInfo= null;
+    String aux;
     EditText editText,editText1;
     Button button,button1,button2;
     @Override
@@ -67,9 +61,9 @@ public class principal extends AppCompatActivity {
         list = login_activity.list;
         editText=findViewById(R.id.editText1);
         editText1=findViewById(R.id.editText2);
-        button=findViewById(R.id.buttonE);
-        button1=findViewById(R.id.buttonM);
-        button2=findViewById(R.id.buttonA);
+        button=findViewById(R.id.borrid);
+        button1=findViewById(R.id.edid);
+        button2=findViewById(R.id.masid);
         listView = (ListView) findViewById(R.id.listViewId);
         listo = new ArrayList<MyData>();
         listo = myInfo.getContras();

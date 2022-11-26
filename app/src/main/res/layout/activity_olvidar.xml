@@ -39,20 +39,6 @@
         app:layout_constraintVertical_bias="0.214" />
 
     <TextView
-        android:id="@+id/importante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="#2B2828"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.477" />
-
-    <TextView
         android:id="@+id/xd"
         android:layout_width="341dp"
         android:layout_height="86dp"
@@ -70,12 +56,12 @@
         app:layout_constraintVertical_bias="0.006" />
 
     <EditText
-        android:id="@+id/userRecupera"
+        android:id="@+id/clid"
         android:layout_width="179dp"
         android:layout_height="45dp"
         android:background="@color/fog"
         android:ems="10"
-        android:hint="@string/label2"
+        android:hint="@string/label3"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,6 +83,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.343"
-        tools:hint="@string/eje" />
+        tools:hint="@string/corr" />
+
+    <Button
+        android:id="@+id/recid"
+        android:layout_width="116dp"
+        android:layout_height="63dp"
+        android:backgroundTint="#1a579f"
+        android:text="@string/envy"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.531" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

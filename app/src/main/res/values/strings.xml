@@ -52,5 +52,16 @@
     <string name="r">Listo</string>
     <string name="c">Concluir</string>
 
+    <string name="c_con">Contraseña:</string>
+    <string name="c_tit">Mis contraseñas de Battle:</string>
+    <string name="c_bat">BattleTag:</string>
+
+    <string name="l_con">Estás son tus contraseñas:</string>
+
+    <string name="modi">Editar</string>
+    <string name="ele">Borrar</string>
+    <string name="masa">Más opciones</string>
+    <string name="envy">Enviar</string>
+
 
 </resources>

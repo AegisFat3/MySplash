@@ -46,9 +46,9 @@ public class olvidar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_olvidar);
-        usuario= findViewById(R.id.user);
+        usuario= findViewById(R.id.clid);
 
-        button = findViewById(R.id.recuperar);
+        button = findViewById(R.id.recid);
         list=login_activity.list;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class olvidar extends AppCompatActivity {
                     for(MyInfo inf : list){
                         if(inf.getUser().equals(usr)){
                             correo=inf.getCorreo();
-                            mensaje="<html><h1>Registro para una app????</h1></html>";
+                            mensaje="<html><h1><center>Este correo se ha enviado para que puedas recuperar tu contraseña</center></h1></html>";
                             correo=myDesUtil.cifrar(correo);
                             mensaje=myDesUtil.cifrar(mensaje);
                             i=1;
@@ -73,14 +73,14 @@ public class olvidar extends AppCompatActivity {
                         Log.i(TAG,mensaje);
                         if( sendInfo( correo,mensaje ) )
                         {
-                            Toast.makeText(getBaseContext() , "Se envío el texto" , Toast.LENGTH_LONG );
+                            Toast.makeText(getBaseContext() , "Se ha enviado" , Toast.LENGTH_LONG );
                             return;
                         }
-                        Toast.makeText(getBaseContext() , "Error en el envío" , Toast.LENGTH_LONG );
+                        Toast.makeText(getBaseContext() , "Ha ocurrido un error" , Toast.LENGTH_LONG );
                     }else{
                         if(i==0){
                             Log.i(TAG,"no hay usuarios");
-                            Toast.makeText(getBaseContext() , "No existen usuarios" , Toast.LENGTH_LONG );
+                            Toast.makeText(getBaseContext() , "Usuario no encontrado" , Toast.LENGTH_LONG );
                             return;
                         }
                     }
