@@ -101,7 +101,7 @@ public class Cluster {
 
     public static void encuentra(String cadena){
         for(MyInfo info: olvidar.list){
-            if(login_activity.persona.equals(info.getUser())){
+            if(login_activity.usr.equals(info.getUser())){
                 cadena = "El usuario existe, recuerde la contraseña";
             }else{
                 cadena = "El usuario no existe, recuerde todo";

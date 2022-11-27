@@ -6,8 +6,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.ToggleButton;
 import android.widget.Switch;
-import com.example.mysplash.des.MyDesUtil;
-import com.example.mysplash.json.MyData;
 import android.widget.Toast;
 import androidx.core.util.PatternsCompat;
 import android.content.Intent;
@@ -18,7 +16,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-
+import com.example.mysplash.des.MyDesUtil;
 import com.example.mysplash.json.MyData;
 import com.example.mysplash.json.MyInfo;
 import com.google.gson.Gson;
@@ -43,7 +41,7 @@ public class registro extends AppCompatActivity{
     private CheckBox chec1, chec2;
     private Switch switch1;
     private static final String TAG = "MainActivity";
-    public static final String archivo = "S.json";
+    public static final String archivo = "archivo.json";
     String json = null;
     public static String usu,password,ecor,tel,dat,ed;
     public static boolean sw= false;
@@ -58,9 +56,9 @@ public class registro extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+
         lista= new ArrayList<>();
         MyData myData=null;
-
         conti = findViewById(R.id.continuarlogid);
         Button inicio = findViewById(R.id.inicio);
         user = findViewById(R.id.usuariologid);
@@ -120,7 +118,6 @@ public class registro extends AppCompatActivity{
                     tog= true;
                 }
 
-
                 if(usu.equals("")||password.equals("")||ecor.equals("")){
                     Log.d(TAG,"vacio");
                     Log.d(TAG,usu);
@@ -149,8 +146,6 @@ public class registro extends AppCompatActivity{
 
                 }
             }
-
-
         });
     }
     public void List2Json(MyInfo info,List<MyInfo> list){
@@ -244,5 +239,4 @@ public class registro extends AppCompatActivity{
             return;
         }
     }
-
 }

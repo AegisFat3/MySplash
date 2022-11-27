@@ -32,23 +32,21 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class login_activity extends AppCompatActivity {
-
     public static final String KEY = "+4xij6jQRSBdCymMxweza/uMYo+o0EUg";
-    private String testClaro = "Mi texto de ejemplo";
+    private String testClaro = "Hola mundo";
     private String testDesCifrado;
+
     public String correo;
     public String mensaje;
     public static List<MyInfo> list;
-    public static String TOG = "error";
-
     public static String TAG = "mensaje";
+    public static String TOG = "error";
     public static String json = null;
-    public static String persona,pass;
+    public static String usr,pswd;
     private Button button1, button2, button3;
     public MyDesUtil myDesUtil= new MyDesUtil().addStringKeyBase64(KEY);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +54,8 @@ public class login_activity extends AppCompatActivity {
         button2 = findViewById(R.id.registroid);
         button1 = findViewById(R.id.accesarid);
         button3 = findViewById(R.id.olvidoid);
-        EditText user = findViewById(R.id.userNameid);
-        EditText contra = findViewById(R.id.editTextTextPassword);
+        EditText usuario = findViewById(R.id.userNameid);
+        EditText pswds = findViewById(R.id.editTextTextPassword);
         Read();
         json2List(json);
         if (json == null || json.length() == 0){
@@ -67,9 +65,9 @@ public class login_activity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                persona = String.valueOf(user.getText());
-                pass = String.valueOf(contra.getText());
-                acceso(persona , pass);
+                usr = String.valueOf(usuario.getText());
+                pswd = String.valueOf(pswds.getText());
+                acceso(usr , pswd);
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +141,7 @@ public class login_activity extends AppCompatActivity {
     public void acceso(String usr , String pswd){
         int i=0;
         if(usr.equals("")||pswd.equals("")){
-            Toast.makeText(getApplicationContext(), "Completa los apartados", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Llena los campos", Toast.LENGTH_LONG).show();
         }else{
             for(MyInfo myInfo : list){
                 if(myInfo.getUser().equals(usr)&&myInfo.getContrasena().equals(pswd)){
@@ -154,7 +152,7 @@ public class login_activity extends AppCompatActivity {
                 }
             }
             if(i==0){
-                Toast.makeText(getApplicationContext(), "La contraseña y el usuario no coinciden", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "El usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
             }
         }
     }
