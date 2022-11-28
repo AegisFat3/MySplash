@@ -73,10 +73,10 @@ public class principal extends AppCompatActivity {
         button.setEnabled(false);
         button1.setEnabled(false);
         if(listo.isEmpty()){
-            Toast.makeText(getApplicationContext(), "Para agregar una contraseña de clic en el menú o en el boton +", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Para agregar una contraseña de clic en el menú o en el botón de agregar", Toast.LENGTH_LONG).show();
             Toast.makeText(getApplicationContext(), "Escriba en los campos", Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(getApplicationContext(), "Para modificar o eliminar una contraseña de click en ella", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Para modificar o eliminar una contraseña da click sobre ella", Toast.LENGTH_LONG).show();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -85,7 +85,7 @@ public class principal extends AppCompatActivity {
                 pos=i;
                 button.setEnabled(true);
                 button1.setEnabled(true);
-                Toast.makeText(getApplicationContext(), "Para guardar los cambios de click en guardar cambios", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Para guardar los cambios de click en guardar, esta opción esta en los tres puntos", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -109,7 +109,7 @@ public class principal extends AppCompatActivity {
                 String usr= String.valueOf(editText.getText());
                 String contra = String.valueOf(editText1.getText());
                 if(usr.equals("")||contra.equals("")){
-                    Toast.makeText(getApplicationContext(), "Llene los campos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Llena los campos", Toast.LENGTH_LONG).show();
                 }else{
                     listo.get(pos).setUsuario(usr);
                     listo.get(pos).setContra(contra);
@@ -118,7 +118,7 @@ public class principal extends AppCompatActivity {
                     listView.setAdapter(myAdapter);
                     editText.setText("");
                     editText1.setText("");
-                    Toast.makeText(getApplicationContext(), "Se modificó la contraseña", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "La contraseña se ha modificado", Toast.LENGTH_LONG).show();
                     button.setEnabled(false);
                     button1.setEnabled(false);
                 }
@@ -140,7 +140,7 @@ public class principal extends AppCompatActivity {
                     listView.setAdapter(myAdapter);
                     editText.setText("");
                     editText1.setText("");
-                    Toast.makeText(getApplicationContext(), "Se agregó la contraseña", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Se agregó la nueva contraseña", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -172,7 +172,7 @@ public class principal extends AppCompatActivity {
                 listView.setAdapter(myAdapter);
                 editText.setText("");
                 editText1.setText("");
-                Toast.makeText(getApplicationContext(), "Se agregó la contraseña", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Se agregó la nueva contraseña", Toast.LENGTH_LONG).show();
             }
             return true;
         }

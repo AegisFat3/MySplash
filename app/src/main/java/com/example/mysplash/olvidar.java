@@ -55,7 +55,7 @@ public class olvidar extends AppCompatActivity {
         button1 = findViewById(R.id.loid);
         button = findViewById(R.id.recid);
         list=login_activity.list;
-        button.setOnClickListener(new View.OnClickListener() {
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(olvidar.this, login_activity.class);
@@ -108,6 +108,7 @@ public class olvidar extends AppCompatActivity {
                 }
             }
         });
+
 
 
     }

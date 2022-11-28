@@ -45,72 +45,9 @@
                         android:textStyle="bold"></TextView>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="99dp"
                         android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            android:layout_width="61dp"
-                            android:layout_height="68dp"
-                            android:layout_centerInParent="true"
-                            android:src="@drawable/battle"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"></ImageView>
-
-                        <TextView
-                            android:id="@+id/textView13"
-                            android:layout_width="72dp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/alata"
-                            android:gravity="center"
-                            android:text="@string/c_bat"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.036"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.13"></TextView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/alata"
-                            android:gravity="center"
-                            android:text="@string/c_con"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.037"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.804"></TextView>
-
-                        <TextView
-                            android:id="@+id/textViewU"
-                            android:layout_width="177dp"
-                            android:layout_height="21dp"
-                            android:paddingStart="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.536"
-                            app:layout_constraintStart_toStartOf="@+id/textView13"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.127"></TextView>
-
-                        <TextView
-                            android:id="@+id/textViewC"
-                            android:layout_width="167dp"
-                            android:layout_height="21dp"
-                            android:paddingStart="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.547"
-                            app:layout_constraintStart_toStartOf="@+id/textView13"
-                            app:layout_constraintTop_toTopOf="@+id/textViewU"
-                            app:layout_constraintVertical_bias="0.767"></TextView>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -119,14 +56,48 @@
                         >
 
 
+                        <TextView
+                            android:layout_width="114dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:text="@string/c_bat"></TextView>
+
+                        <TextView
+                            android:id="@+id/textViewU"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/fog"
+                            android:paddingStart="10dp"></TextView>
+
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
                         >
 
+                        <TextView
+                            android:layout_width="114dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/c_con"></TextView>
+
+                        <TextView
+                            android:id="@+id/textViewC"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/fog"
+                            android:paddingStart="10dp"></TextView>
+
                     </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="68dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/battle"></ImageView>
                 </LinearLayout>
 
                 <LinearLayout
