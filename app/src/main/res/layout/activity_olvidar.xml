@@ -87,8 +87,8 @@
 
     <Button
         android:id="@+id/recid"
-        android:layout_width="116dp"
-        android:layout_height="63dp"
+        android:layout_width="165dp"
+        android:layout_height="66dp"
         android:backgroundTint="#1a579f"
         android:text="@string/envy"
         app:cornerRadius="10dp"
@@ -98,5 +98,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.531" />
+
+    <Button
+        android:id="@+id/loid"
+        android:layout_width="177dp"
+        android:layout_height="64dp"
+        android:backgroundTint="#0A3261"
+        android:text="@string/label4"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

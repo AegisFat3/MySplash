@@ -2,6 +2,7 @@ package com.example.mysplash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,8 +28,10 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,36 +39,54 @@ public class olvidar extends AppCompatActivity {
     public static List<MyInfo> list;
     public static String json = null;
     public static String TAG = "mensaje";
+    public static String TOG = "error";
     public static String cadena= null;
     public MyDesUtil myDesUtil= new MyDesUtil().addStringKeyBase64(registro.KEY);
     public String usr=null;
     public String correo,mensaje;
     EditText usuario,email;
-    Button button;
+    Button button,button1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_olvidar);
         usuario= findViewById(R.id.clid);
-
+        email=findViewById(R.id.correoRecupera);
+        button1 = findViewById(R.id.loid);
         button = findViewById(R.id.recid);
         list=login_activity.list;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(olvidar.this, login_activity.class);
+                startActivity(intent);
+            }
+        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 usr = String.valueOf(usuario.getText());
-                if(usr.equals("")){
-                    Toast.makeText(getApplicationContext(), "Llena el campo de Usuario", Toast.LENGTH_LONG).show();
+                correo= String.valueOf(email.getText());
+                if(usr.equals("")&&email.equals("")){
+                    Toast.makeText(getApplicationContext(), "Completa uno de los dos campos", Toast.LENGTH_LONG).show();
                 }else{
                     int i=0;
+                    int j=0;
                     for(MyInfo inf : list){
-                        if(inf.getUser().equals(usr)){
+                        if(inf.getUser().equals(usr) || inf.getCorreo().equals(correo)){
                             correo=inf.getCorreo();
-                            mensaje="<html><h1><center>Este correo se ha enviado para que puedas recuperar tu contraseña</center></h1></html>";
+                            String contra=inf.getContrasena();
+                            String nueva = String.format("%d",(int)(Math.random()*10000));
+                            mensaje="<html><body><h1>Tu anterior contraseña era "+contra+" , tu nueva contraseña es: "+nueva+"</h1></body></html>";
                             correo=myDesUtil.cifrar(correo);
                             mensaje=myDesUtil.cifrar(mensaje);
+                            list.get(j).setContrasena(nueva);
+                            Log.i(TAG,nueva);
+                            Log.i(TAG,list.get(j).getContrasena());
+                            List2Json(list);
                             i=1;
                         }
+                        j++;
                     }
                     if(i==1){
                         Log.i(TAG,usr);
@@ -73,14 +94,14 @@ public class olvidar extends AppCompatActivity {
                         Log.i(TAG,mensaje);
                         if( sendInfo( correo,mensaje ) )
                         {
-                            Toast.makeText(getBaseContext() , "Se ha enviado" , Toast.LENGTH_LONG );
+                            Toast.makeText(getBaseContext() , "Se ha enviado" , Toast.LENGTH_LONG ).show();
                             return;
                         }
-                        Toast.makeText(getBaseContext() , "Ha ocurrido un error" , Toast.LENGTH_LONG );
+                        Toast.makeText(getBaseContext() , "Ha ocurrido un error" , Toast.LENGTH_LONG ).show();
                     }else{
                         if(i==0){
-                            Log.i(TAG,"no hay usuarios");
-                            Toast.makeText(getBaseContext() , "Usuario no encontrado" , Toast.LENGTH_LONG );
+                            Log.i(TAG,"No hay usuarios");
+                            Toast.makeText(getBaseContext() , "Usuario no encontrado" , Toast.LENGTH_LONG ).show();
                             return;
                         }
                     }
@@ -94,7 +115,7 @@ public class olvidar extends AppCompatActivity {
     {
         JsonObjectRequest jsonObjectRequest = null;
         JSONObject jsonObject = null;
-        String url = "https://us-central1-nemidesarrollo.cloudfunctions.net/function-test";
+        String url = "https://us-central1-nemidesarrollo.cloudfunctions.net/envio_correo";
         RequestQueue requestQueue = null;
         if( correo == null || correo.length() == 0 )
         {
@@ -105,6 +126,8 @@ public class olvidar extends AppCompatActivity {
         {
             jsonObject.put("correo" , correo );
             jsonObject.put("mensaje", mensaje);
+            String hola = jsonObject.toString();
+            Log.i(TAG,hola);
         }
         catch (JSONException e)
         {
@@ -119,12 +142,84 @@ public class olvidar extends AppCompatActivity {
         } , new  Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e  (TAG, error.toString());
+                Log.e  (TOG, error.toString());
             }
         } );
         requestQueue = Volley.newRequestQueue( getBaseContext() );
         requestQueue.add(jsonObjectRequest);
 
         return true;
+    }
+    public boolean Read(){
+        if(!isFileExits()){
+            return false;
+        }
+        File file = getFile();
+        FileInputStream fileInputStream = null;
+        byte[] bytes = null;
+        bytes = new byte[(int)file.length()];
+        try {
+            fileInputStream = new FileInputStream(file);
+            fileInputStream.read(bytes);
+            json=new String(bytes);
+            json= myDesUtil.desCifrar(json);
+            Log.d(TAG,json);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    private File getFile( )
+    {
+        return new File( getDataDir() , registro.archivo );
+    }
+    private boolean isFileExits( )
+    {
+        File file = getFile( );
+        if( file == null )
+        {
+            return false;
+        }
+        return file.isFile() && file.exists();
+    }
+    public void List2Json(List<MyInfo> list){
+        Gson gson =null;
+        String json= null;
+        gson =new Gson();
+        json =gson.toJson(list, ArrayList.class);
+        if (json == null)
+        {
+            Log.d(TAG, "Error json");
+        }
+        else
+        {
+            Log.d(TAG, json);
+            json=myDesUtil.cifrar(json);
+            Log.d(TAG, json);
+            writeFile(json);
+        }
+    }
+    private boolean writeFile(String text){
+        File file =null;
+        FileOutputStream fileOutputStream =null;
+        try{
+            file=getFile();
+            fileOutputStream = new FileOutputStream( file );
+            fileOutputStream.write( text.getBytes(StandardCharsets.UTF_8) );
+            fileOutputStream.close();
+            Log.d(TAG, "Hola");
+            return true;
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

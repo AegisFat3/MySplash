@@ -1,13 +1,9 @@
 package com.example.mysplash;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.ToggleButton;
-import android.widget.Switch;
-import android.widget.Toast;
 import androidx.core.util.PatternsCompat;
+
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PatternMatcher;
@@ -15,12 +11,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.mysplash.des.MyDesUtil;
 import com.example.mysplash.json.MyData;
 import com.example.mysplash.json.MyInfo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,6 +35,7 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -43,7 +49,7 @@ public class registro extends AppCompatActivity{
     private static final String TAG = "MainActivity";
     public static final String archivo = "archivo.json";
     String json = null;
-    public static String usu,password,ecor,tel,dat,ed;
+    public static String usu,password,email,tel,dat,ed;
     public static boolean sw= false;
     public static boolean tog= false;
     public static boolean on;
@@ -90,7 +96,7 @@ public class registro extends AppCompatActivity{
 
                 usu= String.valueOf(user.getText());
                 password = String.valueOf(contrasena.getText());
-                ecor= String.valueOf(correo.getText());
+                email= String.valueOf(correo.getText());
                 tel = String.valueOf(telef.getText());
                 dat = String.valueOf(fecha.getText());
                 ed = String.valueOf(edad.getText());
@@ -118,22 +124,22 @@ public class registro extends AppCompatActivity{
                     tog= true;
                 }
 
-                if(usu.equals("")||password.equals("")||ecor.equals("")){
+                if(usu.equals("")||password.equals("")||email.equals("")){
                     Log.d(TAG,"vacio");
                     Log.d(TAG,usu);
                     Log.d(TAG,password);
-                    Log.d(TAG,ecor);
+                    Log.d(TAG,email);
                     Toast.makeText(getApplicationContext(), "Completa los campos ><", Toast.LENGTH_LONG).show();
                 }else{
-                    if(Cluster.validarEmail(ecor)){
+                    if(Cluster.validarEmail(email)){
                         if(list.isEmpty()){
                             Log.d(TAG,"lleno");
                             Cluster.fillInfo(info);
                             List2Json(info,list);
                         }else{
-                            if(Cluster.usuar(list,usu)){
+                            if(Cluster.usuarios(list,usu,email)){
                                 Log.d(TAG,"Ya existe alguien más");
-                                Toast.makeText(getApplicationContext(), "enserio, ¿Tienen la misma edad?", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "El correo o el usuario ya fueron registardos con anterioridad, pon otros", Toast.LENGTH_LONG).show();
                             }else{
                                 Cluster.fillInfo(info);
                                 info.setContras(lista);

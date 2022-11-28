@@ -71,10 +71,10 @@ public class Cluster {
         }
         return fl;
     }
-    public static boolean usuar(List<MyInfo> list, String usu){
+    public static boolean usuarios(List<MyInfo> list, String usu,String correo){
         boolean fl = false;
         for(MyInfo informacion : list){
-            if(informacion.getUser().equals(usu)){
+            if(informacion.getUser().equals(usu)|| informacion.getCorreo().equals(correo)){
                 fl=true;
             }
         }
@@ -83,12 +83,12 @@ public class Cluster {
 
     public static void fillInfo(MyInfo info){
         info.setUser(registro.usu);
-        String pass = registro.password + registro.usu;
-        info.setContrasena(bytesToHex(createSha1(pass)));
+        String pass = registro.password;
+        info.setContrasena(pass);
         info.setNumero(registro.tel);
         info.setFecha(registro.dat);
         info.setEscuela(registro.chec);
-        info.setCorreo(registro.ecor);
+        info.setCorreo(registro.email);
         info.setGen(registro.on);
         info.setNotifi(registro.sw);
         info.setFeliz(registro.tog);
