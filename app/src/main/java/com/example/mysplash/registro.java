@@ -2,8 +2,6 @@ package com.example.mysplash;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.PatternsCompat;
-
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PatternMatcher;
@@ -12,14 +10,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import com.example.mysplash.des.MyDesUtil;
 import com.example.mysplash.json.MyData;
 import com.example.mysplash.json.MyInfo;
@@ -35,7 +30,6 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -139,7 +133,7 @@ public class registro extends AppCompatActivity{
                         }else{
                             if(Cluster.usuarios(list,usu,email)){
                                 Log.d(TAG,"Ya existe alguien más");
-                                Toast.makeText(getApplicationContext(), "El correo o el usuario ya fueron registardos con anterioridad, pon otros", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "El correo o el usuario ya fueron registrados con anterioridad, pon otros", Toast.LENGTH_LONG).show();
                             }else{
                                 Cluster.fillInfo(info);
                                 info.setContras(lista);
@@ -209,6 +203,7 @@ public class registro extends AppCompatActivity{
             fileInputStream = new FileInputStream(file);
             fileInputStream.read(bytes);
             json=new String(bytes);
+            Log.d(TAG,json);
             json= myDesUtil.desCifrar(json);
             Log.d(TAG,json);
         } catch (FileNotFoundException e) {
