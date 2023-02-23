@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mysplash.Service.DbUsuarios;
 import com.example.mysplash.des.MyDesUtil;
 import com.example.mysplash.json.MyInfo;
 import com.google.gson.Gson;
@@ -53,18 +54,13 @@ public class login_activity extends AppCompatActivity {
         button3 = findViewById(R.id.olvidoid);
         EditText usuario = findViewById(R.id.userNameid);
         EditText pswds = findViewById(R.id.editTextTextPassword);
-        Read();
-        json2List(json);
-        if (json == null || json.length() == 0){
-            button1.setEnabled(false);
-            button3.setEnabled(false);
-        }
+
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 usr = String.valueOf(usuario.getText());
                 pswd = String.valueOf(pswds.getText());
-                acceso(usr , pswd);
+                acceso(usr,pswd);
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
@@ -82,75 +78,26 @@ public class login_activity extends AppCompatActivity {
             }
         });
     }
-    public boolean Read(){
-        if(!isFileExits()){
-            return false;
-        }
-        File file = getFile();
-        FileInputStream fileInputStream = null;
-        byte[] bytes = null;
-        bytes = new byte[(int)file.length()];
-        try {
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bytes);
-            json=new String(bytes);
-            Log.d(TAG,json);
-            json= myDesUtil.desCifrar(json);
-            Log.d(TAG,json);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-    public void json2List( String json )
-    {
-        Gson gson = null;
-        String mensaje = null;
-        if (json == null || json.length() == 0)
-        {
 
-            Toast.makeText(getApplicationContext(), "Error json null or empty", Toast.LENGTH_LONG).show();
-            return;
-        }
-        gson = new Gson();
-        Type listType = new TypeToken<ArrayList<MyInfo>>(){}.getType();
-        list = gson.fromJson(json, listType);
-        if (list == null || list.size() == 0 )
-        {
-            Toast.makeText(getApplicationContext(), "Error list is null or empty", Toast.LENGTH_LONG).show();
-            return;
-        }
-    }
-    private File getFile( )
-    {
-        return new File( getDataDir() , registro.archivo );
-    }
-    private boolean isFileExits( )
-    {
-        File file = getFile( );
-        if( file == null )
-        {
-            return false;
-        }
-        return file.isFile() && file.exists();
-    }
     public void acceso(String usr , String pswd){
-        int i=0;
         if(usr.equals("")||pswd.equals("")){
             Toast.makeText(getApplicationContext(), "Llena los campos", Toast.LENGTH_LONG).show();
         }else{
-            for(MyInfo myInfo : list){
-                if(myInfo.getUser().equals(usr)&&myInfo.getContrasena().equals(pswd)){
+            DbUsuarios dbUsuarios = new DbUsuarios(login_activity.this);
+            MyInfo myInfo = dbUsuarios.GetUsuario(usr);
+            if(myInfo!=null){
+                if(myInfo.getContrasena().equals(pswd)){
+                    Toast.makeText(getApplicationContext(), "Inicio de sesión exitoso", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(login_activity.this, principal.class);
                     intent.putExtra("Objeto", myInfo);
                     startActivity(intent);
-                    i=1;
-                }
+
+                }else{
+                    Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_LONG).show();
             }
-            if(i==0){
-                Toast.makeText(getApplicationContext(), "El usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "Usuario NOT FOUND", Toast.LENGTH_LONG).show();
+
             }
         }
     }

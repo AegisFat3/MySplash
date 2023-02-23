@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mysplash.Service.DbUsuarios;
 import com.example.mysplash.des.MyDesUtil;
 import com.example.mysplash.json.MyInfo;
 import com.google.gson.Gson;
@@ -51,7 +52,7 @@ public class olvidar extends AppCompatActivity {
         email=findViewById(R.id.correoRecupera);
         button1 = findViewById(R.id.loid);
         button = findViewById(R.id.recid);
-        list=login_activity.list;
+        DbUsuarios dbUsuarios = new DbUsuarios(olvidar.this);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,49 +65,170 @@ public class olvidar extends AppCompatActivity {
             public void onClick(View view) {
                 usr = String.valueOf(usuario.getText());
                 correo= String.valueOf(email.getText());
+                MyInfo User = dbUsuarios.GetUsuario(usr,correo);
                 if(usr.equals("")&&email.equals("")){
                     Toast.makeText(getApplicationContext(), "Completa uno de los dos campos", Toast.LENGTH_LONG).show();
                 }else{
-                    int i=0;
-                    int j=0;
-                    for(MyInfo inf : list){
-                        if(inf.getUser().equals(usr) || inf.getCorreo().equals(correo)){
-                            correo=inf.getCorreo();
-                            String contra=inf.getContrasena();
-                            String nueva = String.format("%d",(int)(Math.random()*10000));
-                            mensaje="<html><body><h1>Tu anterior contraseña era "+contra+" , tu nueva contraseña es: "+nueva+"</h1></body></html>";
-                            correo=myDesUtil.cifrar(correo);
-                            mensaje=myDesUtil.cifrar(mensaje);
-                            list.get(j).setContrasena(nueva);
-                            Log.i(TAG,nueva);
-                            Log.i(TAG,list.get(j).getContrasena());
-                            List2Json(list);
-                            i=1;
-                        }
-                        j++;
-                    }
-                    if(i==1){
-                        Log.i(TAG,usr);
-                        Log.i(TAG,correo);
-                        Log.i(TAG,mensaje);
-                        if( sendInfo( correo,mensaje ) )
-                        {
-                            Toast.makeText(getBaseContext() , "Se ha enviado" , Toast.LENGTH_LONG ).show();
-                            return;
-                        }
-                        Toast.makeText(getBaseContext() , "Ha ocurrido un error" , Toast.LENGTH_LONG ).show();
+                    if(User == null){
+                        Toast.makeText(getApplicationContext(), "El usuario o correo no existen", Toast.LENGTH_LONG).show();
                     }else{
-                        if(i==0){
-                            Log.i(TAG,"No hay usuarios");
-                            Toast.makeText(getBaseContext() , "Usuario no encontrado" , Toast.LENGTH_LONG ).show();
-                            return;
+                        correo=User.getCorreo();
+                        String contra=User.getContrasena();
+                        String nueva = String.format("%d",(int)(Math.random()*10000));
+                        mensaje="<!DOCTYPE html>\n" +
+                                "<html lang=\"en\">\n" +
+                                "<head>\n" +
+                                "  <meta charset=\"UTF-8\">\n" +
+                                "  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
+                                "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                                "  <title>Recuperar mi contrasena</title>\n" +
+                                "  <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
+                                "  <link href=\"https://fonts.googleapis.com/css2?family=Montserrat&display=swap\" rel=\"stylesheet\">\n" +
+                                "  <link rel=\"stylesheet\" href=\"style.css\">\n" +
+                                "\n" +
+                                "</head>\n" +
+                                "<body>\n" +
+                                "  <main class=\"card\">\n" +
+                                "    <header>\n" +
+                                "      <img src=\"https://mba.americaeconomia.com/sites/mba.americaeconomia.com/files/styles/article_main_image/public/field/image/emails.jpg?itok=1ZSYbr4F\" alt=\"\">\n" +
+                                "    </header>\n" +
+                                "\n" +
+                                "    <section>\n" +
+                                "      <h2>Recuperar contraseña</h2>\n" +
+                                "       <br>\n" +
+                                "      <h4>Tu anterior contraseña era: "+contra+"</h4>\n" +
+                                "       <br>\n" +
+                                "      <h4>Tu nueva contraseña es: "+nueva+"</h4>\n" +
+                                "        <br>\n" +
+                                "      <ul>\n" +
+                                "        <li><a href=\"#\" class=\"fa\"></a></li>\n" +
+                                "        <li><a href=\"#\" class=\"fa\"></a></li>\n" +
+                                "        <li><a href=\"#\" class=\"fa\"></a></li>\n" +
+                                "        <li><a href=\"#\" class=\"fa\"></a></li>\n" +
+                                "      </ul>\n" +
+                                "    </section>\n" +
+                                "\n" +
+                                "    <footer>\n" +
+                                "      <p><strong>X-type</strong></p>\n" +
+                                "    </footer>\n" +
+                                "  </main>\n" +
+                                "</body>\n" +
+                                "</html>\n" +
+                                "\n" +
+                                "<style>\n" +
+                                "    * {\n" +
+                                "  margin: 0;\n" +
+                                "  padding: 0;\n" +
+                                "  box-sizing: border-box;\n" +
+                                "}\n" +
+                                "\n" +
+                                "body {\n" +
+                                "  font-family: 'Montserrat', sans-serif;\n" +
+                                "  background-color: #bec6ce;\n" +
+                                "}\n" +
+                                "\n" +
+                                ".card {\n" +
+                                "  width: 400px;\n" +
+                                "  overflow: hidden;\n" +
+                                "  position: absolute;\n" +
+                                "  top: 50%;\n" +
+                                "  left: 50%;\n" +
+                                "  transform: translate(-50%, -50%);\n" +
+                                "  background: white;\n" +
+                                "  border-radius: 15px;\n" +
+                                "  box-shadow: 7px 13px 37px rgba(0, 0, 0, .6);\n" +
+                                "}\n" +
+                                "\n" +
+                                "header {\n" +
+                                "  width: 100%;\n" +
+                                "  height: 200px;\n" +
+                                "  overflow: hidden;\n" +
+                                "  position: relative;\n" +
+                                "}\n" +
+                                "\n" +
+                                "header::before {\n" +
+                                "  content: '';\n" +
+                                "  position: absolute;\n" +
+                                "  border-top: 30px solid transparent;\n" +
+                                "  border-left: 400px solid white;\n" +
+                                "  bottom: 0;\n" +
+                                "}\n" +
+                                "\n" +
+                                "header img {\n" +
+                                "  width: 100%;\n" +
+                                "  height: 199px;\n" +
+                                "}\n" +
+                                "\n" +
+                                "section {\n" +
+                                "  padding: 10px;\n" +
+                                "  overflow: hidden;\n" +
+                                "  text-align: center;\n" +
+                                "}\n" +
+                                "\n" +
+                                "section h2 {\n" +
+                                "  margin: .5em 0;\n" +
+                                "}\n" +
+                                "\n" +
+                                "section p {\n" +
+                                "  margin: 1em 0;\n" +
+                                "}\n" +
+                                "\n" +
+                                "ul li {\n" +
+                                "  list-style: none;\n" +
+                                "  display: inline-block;\n" +
+                                "  margin: .5em .2em;\n" +
+                                "}\n" +
+                                "\n" +
+                                "ul li a {\n" +
+                                "  text-decoration: none;\n" +
+                                "  color: white;\n" +
+                                "  background: #f5c31e;\n" +
+                                "  width: 30px;\n" +
+                                "  height: 30px;\n" +
+                                "  line-height: 30px !important;\n" +
+                                "  border-radius: 50%;\n" +
+                                "  transition: all .3s ease-in-out;\n" +
+                                "}\n" +
+                                "\n" +
+                                "ul li a:hover {\n" +
+                                "  transform: scale(1.2);\n" +
+                                "}\n" +
+                                "\n" +
+                                "footer {\n" +
+                                "  width: 100%;\n" +
+                                "  height: 80px;\n" +
+                                "  background: #031231;\n" +
+                                "  color: white;\n" +
+                                "  position: relative;\n" +
+                                "}\n" +
+                                "\n" +
+                                "footer::before {\n" +
+                                "  content: '';\n" +
+                                "  position: absolute;\n" +
+                                "  border-bottom: 30px solid transparent;\n" +
+                                "  border-right: 400px solid white;\n" +
+                                "  top: 0;\n" +
+                                "}\n" +
+                                "\n" +
+                                "footer p {\n" +
+                                "  padding: 30px;\n" +
+                                "}\n" +
+                                "</style>";
+                        correo=myDesUtil.cifrar(correo);
+                        mensaje=myDesUtil.cifrar(mensaje);
+                        boolean f = dbUsuarios.AlterUser(usr,nueva);
+                        if(f){
+                            if(sendInfo(correo,mensaje)){
+                                Toast.makeText(getApplicationContext(), "Revisa tu correo", Toast.LENGTH_LONG).show();
+                            }else{Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();}
+
+                        }else{
+                            Toast.makeText(getApplicationContext(), "No se pudo enviar el correo", Toast.LENGTH_LONG).show();
                         }
                     }
                 }
             }
         });
-
-
 
     }
     public boolean sendInfo( String correo ,String mensaje)
@@ -148,76 +270,5 @@ public class olvidar extends AppCompatActivity {
 
         return true;
     }
-    public boolean Read(){
-        if(!isFileExits()){
-            return false;
-        }
-        File file = getFile();
-        FileInputStream fileInputStream = null;
-        byte[] bytes = null;
-        bytes = new byte[(int)file.length()];
-        try {
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bytes);
-            json=new String(bytes);
-            json= myDesUtil.desCifrar(json);
-            Log.d(TAG,json);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-    private File getFile( )
-    {
-        return new File( getDataDir() , registro.archivo );
-    }
-    private boolean isFileExits( )
-    {
-        File file = getFile( );
-        if( file == null )
-        {
-            return false;
-        }
-        return file.isFile() && file.exists();
-    }
-    public void List2Json(List<MyInfo> list){
-        Gson gson =null;
-        String json= null;
-        gson =new Gson();
-        json =gson.toJson(list, ArrayList.class);
-        if (json == null)
-        {
-            Log.d(TAG, "Error json");
-        }
-        else
-        {
-            Log.d(TAG, json);
-            json=myDesUtil.cifrar(json);
-            Log.d(TAG, json);
-            writeFile(json);
-        }
-    }
-    private boolean writeFile(String text){
-        File file =null;
-        FileOutputStream fileOutputStream =null;
-        try{
-            file=getFile();
-            fileOutputStream = new FileOutputStream( file );
-            fileOutputStream.write( text.getBytes(StandardCharsets.UTF_8) );
-            fileOutputStream.close();
-            Log.d(TAG, "Hola");
-            return true;
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        return false;
-    }
+
 }

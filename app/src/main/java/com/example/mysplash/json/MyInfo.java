@@ -11,10 +11,38 @@ public class MyInfo implements Serializable {
     private String numero;
     private String fecha;
     private String edad;
-    private String[] escuela;
-    private Boolean gen;
-    private Boolean notifi;
-    private Boolean feliz;
+
+    public String getBox1() {
+        return box1;
+    }
+
+    public void setBox1(String box1) {
+        this.box1 = box1;
+    }
+
+    public String getBox2() {
+        return box2;
+    }
+
+    public void setBox2(String box2) {
+        this.box2 = box2;
+    }
+
+    private String box1;
+    private String box2;
+    private int gen;
+    private int notifi;
+    private int feliz;
+
+    public int getId_usr() {
+        return id_usr;
+    }
+
+    public void setId_usr(int id_usr) {
+        this.id_usr = id_usr;
+    }
+
+    private int id_usr;
 
     public List<MyData> getContras() {
         return contras;
@@ -75,35 +103,28 @@ public class MyInfo implements Serializable {
         this.edad = edad;
     }
 
-    public String[] getEscuela() {
-        return escuela;
-    }
 
-    public void setEscuela(String[] escuela) {
-        this.escuela = escuela;
-    }
-
-    public Boolean getGen() {
+    public int getGen() {
         return gen;
     }
 
-    public void setGen(Boolean gen) {
+    public void setGen(int gen) {
         this.gen = gen;
     }
 
-    public Boolean getNotifi() {
+    public int getNotifi() {
         return notifi;
     }
 
-    public void setNotifi(Boolean notifi) {
+    public void setNotifi(int notifi) {
         this.notifi = notifi;
     }
 
-    public Boolean getFeliz() {
+    public int getFeliz() {
         return feliz;
     }
 
-    public void setFeliz(Boolean feliz) {
+    public void setFeliz(int feliz) {
         this.feliz = feliz;
     }
 }

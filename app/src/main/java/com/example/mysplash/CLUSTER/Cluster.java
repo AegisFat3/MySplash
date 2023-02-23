@@ -1,8 +1,11 @@
-package com.example.mysplash;
+package com.example.mysplash.CLUSTER;
 
 import androidx.core.util.PatternsCompat;
 
 import com.example.mysplash.json.MyInfo;
+import com.example.mysplash.login_activity;
+import com.example.mysplash.olvidar;
+import com.example.mysplash.registro;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import android.content.Context;
@@ -87,16 +90,15 @@ public class Cluster {
         info.setContrasena(pass);
         info.setNumero(registro.tel);
         info.setFecha(registro.dat);
-        info.setEscuela(registro.chec);
         info.setCorreo(registro.email);
         info.setGen(registro.on);
         info.setNotifi(registro.sw);
         info.setFeliz(registro.tog);
         info.setEdad(registro.ed);
+        info.setBox1(registro.box1s);
+        info.setBox2(registro.box2s);
     }
-    public static void vaciaJson(String json){
-        json = null;
-    }
+
 
 
     public static void encuentra(String cadena){
