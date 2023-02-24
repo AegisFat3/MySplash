@@ -63,5 +63,19 @@
     <string name="masa">Agregar</string>
     <string name="envy">Enviar</string>
 
+    <string name="weather">Clima</string>
+    <string name="country_iso_code">Código ISO del País :</string>
+    <string name="code">Código</string>
+    <string name="city_name">Nombre de Ciudad :</string>
+    <string name="name">Nombre</string>
+    <string name="get">Obtener</string>
+    <string name="temperature">Temperatura</string>
+    <string name="current">Actual :</string>
+    <string name="minimum">Mínima :</string>
+    <string name="maximum">Máxima :</string>
+    <string name="pressure">Presión :</string>
+    <string name="humidity">Humedad :</string>
+    <string name="Fields_cannot_be_empty">Los campos no pueden ser vacíos</string>
+
 
 </resources>

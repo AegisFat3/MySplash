@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mysplash">
 
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +16,9 @@
         android:theme="@style/Theme.MySplash"
         tools:targetApi="31">
         <activity
+            android:name=".Api"
+            android:exported="false" />
+        <activity
             android:name=".ListViewActivity"
             android:exported="false" />
         <activity
@@ -26,12 +29,11 @@
             android:exported="false" />
         <activity
             android:name=".principal"
-            android:theme="@style/Theme.MySplashDos"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MySplashDos" />
         <activity
             android:name=".registro"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -42,5 +44,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

@@ -124,7 +124,7 @@ public class principal extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Llena los campos", Toast.LENGTH_LONG).show();
                 }else{
                     DbContras dbContras = new DbContras(principal.this);
-                    boolean id=dbContras.AlterContra(data.getUsuario(),data.getContra(),myInfo.getId_usr(),data.getId_contra());
+                    boolean id=dbContras.AlterContra(usr,contra,myInfo.getId_usr(),data.getId_contra());
                     if(id){
                         listo = dbContras.getContras(myInfo.getId_usr());
                         MyAdapter myAdapter = new MyAdapter(listo, getBaseContext());
@@ -213,6 +213,8 @@ public class principal extends AppCompatActivity {
         }
         if(id==R.id.item2){
             Toast.makeText(getApplicationContext(), "Es un secreto", Toast.LENGTH_LONG).show();
+            Intent intent= new Intent(principal.this,Api.class);
+            startActivity(intent);
             return true;
         }
         if(id==R.id.item3){

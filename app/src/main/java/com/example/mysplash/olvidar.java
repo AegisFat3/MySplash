@@ -1,8 +1,8 @@
 package com.example.mysplash;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -17,12 +18,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mysplash.Service.DbUsuarios;
+import com.example.mysplash.Service.UsuariosDBService;
 import com.example.mysplash.des.MyDesUtil;
 import com.example.mysplash.json.MyInfo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -50,9 +54,11 @@ public class olvidar extends AppCompatActivity {
         setContentView(R.layout.activity_olvidar);
         usuario= findViewById(R.id.clid);
         email=findViewById(R.id.correoRecupera);
-        button1 = findViewById(R.id.loid);
         button = findViewById(R.id.recid);
+        button1 = findViewById(R.id.loid);
+
         DbUsuarios dbUsuarios = new DbUsuarios(olvidar.this);
+
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,16 +73,15 @@ public class olvidar extends AppCompatActivity {
                 correo= String.valueOf(email.getText());
                 MyInfo User = dbUsuarios.GetUsuario(usr,correo);
                 if(usr.equals("")&&email.equals("")){
-                    Toast.makeText(getApplicationContext(), "Completa uno de los dos campos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Completa porfavor", Toast.LENGTH_LONG).show();
                 }else{
                     if(User == null){
-                        Toast.makeText(getApplicationContext(), "El usuario o correo no existen", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "No existe alguno de los dos", Toast.LENGTH_LONG).show();
                     }else{
                         correo=User.getCorreo();
                         String contra=User.getContrasena();
                         String nueva = String.format("%d",(int)(Math.random()*10000));
-                        mensaje="<!DOCTYPE html>\n" +
-                                "<html lang=\"en\">\n" +
+                        mensaje="<html lang=\"en\">\n" +
                                 "<head>\n" +
                                 "  <meta charset=\"UTF-8\">\n" +
                                 "  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
@@ -94,22 +99,19 @@ public class olvidar extends AppCompatActivity {
                                 "    </header>\n" +
                                 "\n" +
                                 "    <section>\n" +
-                                "      <h2>Recuperar contraseña</h2>\n" +
+                                "      <h1><center>Recuperar contraseña</center></h1>\n" +
                                 "       <br>\n" +
-                                "      <h4>Tu anterior contraseña era: "+contra+"</h4>\n" +
+                                "      <h3>Tu anterior contraseña era: "+contra+"</h3>\n" +
                                 "       <br>\n" +
-                                "      <h4>Tu nueva contraseña es: "+nueva+"</h4>\n" +
+                                "      <h3>Tu nueva contraseña es: "+nueva+"</h3>\n" +
                                 "        <br>\n" +
                                 "      <ul>\n" +
-                                "        <li><a href=\"#\" class=\"fa\"></a></li>\n" +
-                                "        <li><a href=\"#\" class=\"fa\"></a></li>\n" +
-                                "        <li><a href=\"#\" class=\"fa\"></a></li>\n" +
-                                "        <li><a href=\"#\" class=\"fa\"></a></li>\n" +
+                                "<p><center><img src=\"https://i.kym-cdn.com/photos/images/newsfeed/001/187/956/8c5.gif\" height=\"150\"></center></p>\n" +
                                 "      </ul>\n" +
                                 "    </section>\n" +
                                 "\n" +
                                 "    <footer>\n" +
-                                "      <p><strong>X-type</strong></p>\n" +
+                                "      <p><strong><center><h4>X-type</h4></center></strong></p>\n" +
                                 "    </footer>\n" +
                                 "  </main>\n" +
                                 "</body>\n" +
@@ -219,16 +221,17 @@ public class olvidar extends AppCompatActivity {
                         boolean f = dbUsuarios.AlterUser(usr,nueva);
                         if(f){
                             if(sendInfo(correo,mensaje)){
-                                Toast.makeText(getApplicationContext(), "Revisa tu correo", Toast.LENGTH_LONG).show();
-                            }else{Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();}
+                                Toast.makeText(getApplicationContext(), "Correo enviado", Toast.LENGTH_LONG).show();
+                            }else{Toast.makeText(getApplicationContext(), "Error con sendinfo", Toast.LENGTH_LONG).show();}
 
                         }else{
-                            Toast.makeText(getApplicationContext(), "No se pudo enviar el correo", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "ERROR correo no enviado", Toast.LENGTH_LONG).show();
                         }
                     }
                 }
             }
         });
+
 
     }
     public boolean sendInfo( String correo ,String mensaje)

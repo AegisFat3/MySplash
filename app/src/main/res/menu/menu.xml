@@ -7,7 +7,7 @@
         />
     <item
         android:id="@+id/item2"
-        android:title="Guardar" />
+        android:title="Ver clima" />
     <item
         android:id="@+id/item3"
         android:title="Cerrar Sesión" />

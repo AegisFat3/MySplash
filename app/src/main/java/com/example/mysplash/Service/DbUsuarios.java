@@ -114,7 +114,7 @@ public class DbUsuarios extends UsuariosDBService{
         UsuariosDBService usuariosDBService = new UsuariosDBService(context);
         SQLiteDatabase db = usuariosDBService.getReadableDatabase();
         Cursor cursor=null;
-        String query = "SELECT * FROM t_usuarios WHERE usuario = ? AND mail = ?";
+        String query = "SELECT * FROM t_usuarios WHERE usuario = ? AND correo = ?";
         String[] args = {user,mail};
 
         cursor = db.rawQuery(query,args);
