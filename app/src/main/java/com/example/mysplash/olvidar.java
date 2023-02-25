@@ -80,7 +80,17 @@ public class olvidar extends AppCompatActivity {
                     }else{
                         correo=User.getCorreo();
                         String contra=User.getContrasena();
-                        String nueva = String.format("%d",(int)(Math.random()*10000));
+                        final String CADENA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                        final int LONGITUD = 10;
+                        StringBuilder sb = new StringBuilder();
+                        for(int i=0;i<LONGITUD;i++){
+                            double aleatorio = Math.random()*CADENA.length();
+                            int posicion = (int) aleatorio;
+                            char letra = CADENA.charAt(posicion);
+                            sb.append(letra);
+                        }
+
+                        String nueva = sb.toString();
                         mensaje="<html lang=\"en\">\n" +
                                 "<head>\n" +
                                 "  <meta charset=\"UTF-8\">\n" +
@@ -95,7 +105,7 @@ public class olvidar extends AppCompatActivity {
                                 "<body>\n" +
                                 "  <main class=\"card\">\n" +
                                 "    <header>\n" +
-                                "      <img src=\"https://mba.americaeconomia.com/sites/mba.americaeconomia.com/files/styles/article_main_image/public/field/image/emails.jpg?itok=1ZSYbr4F\" alt=\"\">\n" +
+                                "      <center><img src=\"https://mba.americaeconomia.com/sites/mba.americaeconomia.com/files/styles/article_main_image/public/field/image/emails.jpg?itok=1ZSYbr4F\" alt=\"\"></center>\n" +
                                 "    </header>\n" +
                                 "\n" +
                                 "    <section>\n" +
@@ -106,12 +116,12 @@ public class olvidar extends AppCompatActivity {
                                 "      <h3>Tu nueva contraseña es: "+nueva+"</h3>\n" +
                                 "        <br>\n" +
                                 "      <ul>\n" +
-                                "<p><center><img src=\"https://i.kym-cdn.com/photos/images/newsfeed/001/187/956/8c5.gif\" height=\"150\"></center></p>\n" +
+                                "<p><center><img src=\"https://i.kym-cdn.com/photos/images/newsfeed/001/187/956/8c5.gif\" height=\"150\" ></center></p>\n" +
                                 "      </ul>\n" +
                                 "    </section>\n" +
                                 "\n" +
                                 "    <footer>\n" +
-                                "      <p><strong><center><h4>X-type</h4></center></strong></p>\n" +
+                                "      <p><strong><center><h3>X-type</h3></center></strong></p>\n" +
                                 "    </footer>\n" +
                                 "  </main>\n" +
                                 "</body>\n" +
@@ -179,6 +189,16 @@ public class olvidar extends AppCompatActivity {
                                 "  list-style: none;\n" +
                                 "  display: inline-block;\n" +
                                 "  margin: .5em .2em;\n" +
+                                "}\n" +
+                                "h1 {\n" +
+                                "  color: #161840;\n" +
+                                "  font-size: 38px;\n" +
+                                "  font-family: Arial;\n" +
+                                "}\n" +
+                                "h3 {\n" +
+                                "  color: #2C2E63;\n" +
+                                "  font-size: 28px;\n" +
+                                "  font-family: Arial;\n" +
                                 "}\n" +
                                 "\n" +
                                 "ul li a {\n" +
