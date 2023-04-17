@@ -121,7 +121,7 @@ public class olvidar extends AppCompatActivity {
                                 "    </section>\n" +
                                 "\n" +
                                 "    <footer>\n" +
-                                "      <p><strong><center><h3>X-type</h3></center></strong></p>\n" +
+                                "      <p><strong><center><h3>Howl</h3></center></strong></p>\n" +
                                 "    </footer>\n" +
                                 "  </main>\n" +
                                 "</body>\n" +
@@ -247,6 +247,9 @@ public class olvidar extends AppCompatActivity {
                         }else{
                             Toast.makeText(getApplicationContext(), "ERROR correo no enviado", Toast.LENGTH_LONG).show();
                         }
+                        Intent intent2 = new Intent(olvidar.this, login_activity2.class);
+                        intent2.putExtra("Contrasena", contra);
+                        startActivity(intent2);
                     }
                 }
             }

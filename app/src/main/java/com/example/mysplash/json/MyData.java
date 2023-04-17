@@ -5,6 +5,10 @@ import java.io.Serializable;
 public class MyData implements Serializable {
     private String contra;
 
+    public MyData() {
+
+    }
+
     public int getId_contra() {
         return id_contra;
     }
@@ -41,5 +45,7 @@ public class MyData implements Serializable {
     public void setId_usr(int id_usr) {
         this.id_usr = id_usr;
     }
+
+
 
 }

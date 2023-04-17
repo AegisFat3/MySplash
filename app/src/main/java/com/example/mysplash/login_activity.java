@@ -1,8 +1,10 @@
 package com.example.mysplash;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mysplash.Permisos.Permisos;
 import com.example.mysplash.Service.DbUsuarios;
 import com.example.mysplash.des.MyDesUtil;
 import com.example.mysplash.json.MyInfo;
@@ -34,7 +37,8 @@ public class login_activity extends AppCompatActivity {
     public static final String KEY = "+4xij6jQRSBdCymMxweza/uMYo+o0EUg";
     private String testClaro = "Hola mundo";
     private String testDesCifrado;
-
+    private boolean tPC = false, tPI= false;
+    private static final int CODIGO_PERMISOS_CAMARA = 1, CODIGO_PERMISOS_INTERNET=2;
     public String correo;
     public String mensaje;
     public static List<MyInfo> list;
@@ -49,6 +53,9 @@ public class login_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Permisos permisos = new Permisos();
+        permisos.vypc(getApplicationContext(),login_activity.this);
+        permisos.vypi(getApplicationContext(),login_activity.this);
         button2 = findViewById(R.id.registroid);
         button1 = findViewById(R.id.accesarid);
         button3 = findViewById(R.id.olvidoid);
@@ -99,6 +106,29 @@ public class login_activity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Usuario NOT FOUND", Toast.LENGTH_LONG).show();
 
             }
+        }
+    }
+    //Solicitud de permisos :D
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Permisos permisos = new Permisos();
+        switch (requestCode) {
+            case CODIGO_PERMISOS_CAMARA:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    permisos.pcsi(getApplicationContext());
+                } else {
+                    permisos.pcno(getApplicationContext());
+                }
+                break;
+
+            case CODIGO_PERMISOS_INTERNET:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    permisos.pisi(getApplicationContext());
+                } else {
+                    permisos.pino(getApplicationContext());
+                }
+                break;
         }
     }
 }

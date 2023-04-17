@@ -36,12 +36,12 @@
                         android:layout_height="wrap_content"
                         android:background="#080C35"
                         android:fontFamily="@font/electrolize"
-                        android:paddingBottom="15dp"
+                        android:paddingBottom="2dp"
                         android:shadowColor="#801F1F"
                         android:text="@string/c_tit"
                         android:textAlignment="center"
                         android:textColor="@color/fog"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"></TextView>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -98,6 +98,7 @@
                         android:layout_height="68dp"
                         android:layout_centerInParent="true"
                         android:src="@drawable/battle"></ImageView>
+
                 </LinearLayout>
 
                 <LinearLayout

@@ -149,4 +149,42 @@ public class DbUsuarios extends UsuariosDBService{
         }
         return correcto;
     }
+    public boolean editaContra(int id, String contra){
+        boolean correcto = false;
+        SQLiteDatabase sqLiteDatabase = null;
+        sqLiteDatabase = getWritableDatabase();
+        try{
+            sqLiteDatabase.execSQL("UPDATE "+TABLE_USERS+" SET paswd = '"+contra+"'WHERE id ='"+id+"'");
+            correcto = true;
+        }catch (Exception ex){
+            ex.toString();
+            correcto = false;
+        }finally {
+            sqLiteDatabase.close();
+        }
+        return correcto;
+    }
+
+    public boolean updatePassword(String user, String newPassword) {
+        boolean correcto = false;
+        UsuariosDBService usuariosDBService = new UsuariosDBService(context);
+        SQLiteDatabase db =usuariosDBService.getWritableDatabase();
+        try{
+            db.execSQL("UPDATE " + TABLE_USERS + " SET paswd = '" + newPassword + "' WHERE usuario='" + user + "'");
+            correcto = true;
+        }catch(Exception ex){
+            ex.toString();
+        }
+        return correcto;
+    }
+
+    public boolean authenticateUser(String user, String contra) {
+        DbUsuarios db = new DbUsuarios(context);
+        MyInfo info = db.GetUsuario(user);
+        if (info != null && info.getContrasena().equals(contra)) {
+            return true; // Autenticación exitosa
+        }
+        return false; // Autenticación fallida
+    }
+
 }

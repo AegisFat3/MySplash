@@ -32,20 +32,20 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="85dp"
+                        android:layout_height="match_parent"
                         android:background="#101C3E"
                         android:orientation="horizontal"
                         android:padding="5dp">
 
                         <TextView
-                            android:layout_width="326dp"
-                            android:layout_height="match_parent"
+                            android:layout_width="322dp"
+                            android:layout_height="wrap_content"
                             android:fontFamily="@font/amiko_bold"
                             android:gravity="center"
                             android:text="@string/mu"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="48sp"
+                            android:textSize="34sp"
                             android:textStyle="bold"></TextView>
 
                         <LinearLayout
@@ -63,7 +63,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="374dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -151,34 +151,37 @@
                         <Button
                             android:id="@+id/masid"
                             android:layout_width="match_parent"
-                            android:layout_height="52dp"
+                            android:layout_height="42dp"
                             android:backgroundTintMode="add"
                             android:fontFamily="@font/electrolize"
                             android:text="@string/masa"
-                            android:textAlignment="center" />
+                            android:textAlignment="center"
+                            android:textSize="13sp" />
 
                         <Button
                             android:id="@+id/edid"
                             android:layout_width="match_parent"
-                            android:layout_height="52dp"
+                            android:layout_height="42dp"
                             android:elevation="6dp"
                             android:fontFamily="@font/electrolize"
-                            android:text="@string/modi"></Button>
+                            android:text="@string/modi"
+                            android:textSize="13sp"></Button>
 
                         <Button
                             android:id="@+id/borrid"
                             android:layout_width="match_parent"
-                            android:layout_height="55dp"
+                            android:layout_height="42dp"
                             android:elevation="6dp"
                             android:fontFamily="@font/electrolize"
                             android:paddingRight="10dp"
-                            android:text="@string/ele"></Button>
+                            android:text="@string/ele"
+                            android:textSize="13sp"></Button>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="34dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                     </LinearLayout>

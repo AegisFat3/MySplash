@@ -4,6 +4,7 @@
     package="com.example.mysplash">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MySplash"
         tools:targetApi="31">
+        <activity
+            android:name=".login_activity2"
+            android:exported="false" />
         <activity
             android:name=".Api"
             android:exported="false" />

@@ -76,6 +76,13 @@
     <string name="pressure">Presión :</string>
     <string name="humidity">Humedad :</string>
     <string name="Fields_cannot_be_empty">Los campos no pueden ser vacíos</string>
+    <string name="loc">Ubicación :</string>
+    <string name="img">Cambiar :</string>
+    <string name="c1">Contraseña correo</string>
+    <string name="c2">Nueva contraseña</string>
+    <string name="exp">Ingresa tu usuario, la contraseña enviada por correo, y la nueva contraseña que quieres utilizar</string>
+    <string name="v1">Volver al registro</string>
+    <string name="v2">Ingresar con nueva contraseña</string>
 
 
 </resources>
