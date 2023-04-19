@@ -5,6 +5,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MySplash"
         tools:targetApi="31">
+        <activity
+            android:name=".mapa"
+            android:exported="false" />
+        <activity
+            android:name=".eliminapass"
+            android:exported="false" />
+        <activity
+            android:name=".editapass"
+            android:exported="false" />
+        <activity
+            android:name=".agregapass"
+            android:exported="false" />
         <activity
             android:name=".login_activity2"
             android:exported="false" />

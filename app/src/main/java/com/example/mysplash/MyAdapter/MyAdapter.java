@@ -1,28 +1,27 @@
 package com.example.mysplash.MyAdapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.BaseAdapter;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.mysplash.R;
 import com.example.mysplash.json.MyData;
 
+import java.util.List;
+
 
 import java.io.Serializable;
-import java.util.List;
 
 public class MyAdapter extends BaseAdapter implements Serializable {
     private List<MyData> list;
     private Context context;
     private LayoutInflater layoutInflater;
-    public static String TAG="Hi";
+
     public MyAdapter(List<MyData> list, Context context)
     {
         this.list = list;
@@ -63,18 +62,22 @@ public class MyAdapter extends BaseAdapter implements Serializable {
     {
         return i;
     }
-
+    //Modificar MyAdapter agregar el imageview
     @Override
     public View getView(int i, View view, ViewGroup viewGroup)
     {
-        TextView textView= null;
-        TextView textView1= null;
+        TextView textView = null;
+        TextView textView2 = null;
         ImageView imageView = null;
+        byte[] imagenBytes = list.get(i).getData();
+        Bitmap imagenBitmap = BitmapFactory.decodeByteArray(imagenBytes, 0, imagenBytes.length);
         view = layoutInflater.inflate(R.layout.activity_list_view, null );
-        textView= view.findViewById(R.id.textViewU);
-        textView1=view.findViewById(R.id.textViewC);
-        textView1.setText(String.valueOf(list.get(i).getContra()));
-        textView.setText(String.valueOf(list.get(i).getUsuario()));
+        textView = view.findViewById(R.id.textViewC);
+        textView2 = view.findViewById(R.id.textViewU);
+        textView.setText(list.get(i).getContra());
+        textView2.setText(list.get(i).getUsuario());
+        imageView = view.findViewById(R.id.imagencita2);
+        imageView.setImageBitmap(imagenBitmap);
         return view;
     }
 }

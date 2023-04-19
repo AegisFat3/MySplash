@@ -5,6 +5,42 @@ import java.io.Serializable;
 public class MyData implements Serializable {
     private String contra;
 
+    public byte[] getData() {
+        return data;
+    }
+    private String latitud;
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    private String longitud;
+
+    public void setData(byte[] data) {
+        this.data = data;
+    }
+
+    private byte[] data;
+    private int image;
+    public int getImage() {
+        return image;
+    }
+    public void setImage(int image) {
+        this.image = image;
+    }
+
     public MyData() {
 
     }
@@ -20,6 +56,7 @@ public class MyData implements Serializable {
     private int id_contra;
     private String usuario;
     private int id_usr;
+
 
     public String getContra() {
         return contra;

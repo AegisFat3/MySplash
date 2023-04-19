@@ -7,9 +7,17 @@
         />
     <item
         android:id="@+id/item2"
-        android:title="Ver clima" />
+        android:title="Eliminar una contraseña"
+        />
     <item
         android:id="@+id/item3"
+        android:title="Editar una contraseña"
+        />
+    <item
+        android:id="@+id/item4"
+        android:title="Ver clima" />
+    <item
+        android:id="@+id/item5"
         android:title="Cerrar Sesión" />
 
 

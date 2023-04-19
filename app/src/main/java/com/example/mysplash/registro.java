@@ -40,7 +40,7 @@ public class registro extends AppCompatActivity{
     private RadioButton genm,genh;
     private CheckBox chec1, chec2;
     private Switch switch1;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "Login";
     public static final String archivo = "archivo.json";
     String json = null;
     public static String usu,password,email,tel,dat,ed;

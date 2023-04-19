@@ -3,13 +3,6 @@ package com.example.mysplash;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,157 +12,94 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.mysplash.MyAdapter.MyAdapter;
 import com.example.mysplash.Service.DbContras;
-import com.example.mysplash.des.MyDesUtil;
 import com.example.mysplash.json.MyData;
 import com.example.mysplash.json.MyInfo;
-import com.google.gson.Gson;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class principal extends AppCompatActivity {
-    public List<MyInfo> list;
-    public MyDesUtil myDesUtil= new MyDesUtil().addStringKeyBase64(registro.KEY);
-    public static String TAG = "mensaje";
-    public static String json = null;
+    private TextView usuario;
+    private Button api, Csesion;
     private ListView listView;
-    private List<MyData> listo;
-    public boolean bandera = false;
-    public int pos=0;
-    public static MyInfo myInfo= null;
-    String aux;
-    EditText editText,editText1;
-    Button button,button1,button2;
+    private List<MyData> list;
+    public static String TAG = "Menu";
+    private int []images = { R.drawable.battle};
 
-    MyData data = new MyData();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Object object= null;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+        int idusu = 0;
+        String aux = null;
+        MyInfo info = null;
+        Object object = null;
+        MyData myData = null;
+        DbContras contrasbd = null;
+        contrasbd = new DbContras(getBaseContext());
+        api = findViewById(R.id.config);
+        Csesion = findViewById(R.id.Csesion);
+        usuario = findViewById(R.id.textUser);
         Intent intent = getIntent();
-        if(intent != null){
-            if(intent.getExtras() !=null){
-                object = intent.getExtras().get("Objeto");
+        listView = (ListView) findViewById(R.id.listViewId);
+        Csesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(principal.this, login_activity.class);
+                startActivity(intent);
+            }
+        });
+        api.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(principal.this, Api.class);
+                startActivity(intent);
+            }
+        });
+
+        list = new ArrayList<MyData>();
+        if( intent != null)
+        {
+            aux = intent.getStringExtra("Usuario" );
+            if( aux != null && aux.length()> 0 )
+            {
+                usuario.setText(aux);
+            }
+            if( intent.getExtras() != null ) {
+                object = intent.getExtras().get("MyInfo");
                 if (object != null) {
                     if (object instanceof MyInfo) {
-                        myInfo = (MyInfo) object;
+                        info = (MyInfo) object;
+                        usuario.setText("Bienvenido " + info.getUser() + " de edad " + info.getEdad());
+                        idusu = info.getId_usr();
+                        Log.d("Id usu", String.valueOf(idusu));
+                        list = contrasbd.getContras(idusu);
+                        if(list == null){
+                            Toast.makeText(getBaseContext(), "No hay contras", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
         }
 
-        editText=findViewById(R.id.editText1);
-        editText1=findViewById(R.id.editText2);
-        button=findViewById(R.id.borrid);
-        button1=findViewById(R.id.edid);
-        button2=findViewById(R.id.masid);
-        DbContras dbContras = new DbContras(principal.this);
-        listo = dbContras.getContras(myInfo.getId_usr());
-        /*for(MyData contra : listo){
-            Log.d("Contras",contra.toString());
-        }*/
-        listView = (ListView) findViewById(R.id.listViewId);
-        MyAdapter myAdapter = new MyAdapter(listo, getBaseContext());
+        MyAdapter myAdapter = new MyAdapter( list , getBaseContext() );
         listView.setAdapter(myAdapter);
-        button.setEnabled(false);
-        button1.setEnabled(false);
-        if(listo==null){
-            Toast.makeText(getApplicationContext(), "Para agregar una contraseña de clic en el menú o en el botón de agregar", Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), "Escriba en los campos", Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), String.valueOf(myInfo.getId_usr()), Toast.LENGTH_LONG).show();
-        }
-        Toast.makeText(getApplicationContext(), "Para modificar o eliminar una contraseña da click sobre ella", Toast.LENGTH_LONG).show();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                data = listo.get(i);
-                editText.setText(data.getUsuario());
-                editText1.setText(data.getContra());
-                pos=i;
-                button.setEnabled(true);
-                button1.setEnabled(true);
-                Toast.makeText(getApplicationContext(), "Para guardar los cambios de click en guardar, esta opción esta en los tres puntos", Toast.LENGTH_LONG).show();
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                toast( i );
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DbContras dbContras = new DbContras(principal.this);
-                boolean id=dbContras.eliminarContacto(myInfo.getId_usr(),data.getUsuario(),data.getContra());
-                if(id){
-                    listo=dbContras.getContras(myInfo.getId_usr());
-                    MyAdapter myAdapter = new MyAdapter(listo, getBaseContext());
-                    listView.setAdapter(myAdapter);
-                    editText.setText("");
-                    editText1.setText("");
-                    Toast.makeText(getApplicationContext(), "Se eliminó la contraseña", Toast.LENGTH_LONG).show();
-                    button.setEnabled(false);
-                    button1.setEnabled(false);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Error al eliminar", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String usr= String.valueOf(editText.getText());
-                String contra = String.valueOf(editText1.getText());
-                if(usr.equals("")||contra.equals("")){
-                    Toast.makeText(getApplicationContext(), "Llena los campos", Toast.LENGTH_LONG).show();
-                }else{
-                    DbContras dbContras = new DbContras(principal.this);
-                    boolean id=dbContras.AlterContra(usr,contra,myInfo.getId_usr(),data.getId_contra());
-                    if(id){
-                        listo = dbContras.getContras(myInfo.getId_usr());
-                        MyAdapter myAdapter = new MyAdapter(listo, getBaseContext());
-                        listView.setAdapter(myAdapter);
-                        editText.setText("");
-                        editText1.setText("");
-                        Toast.makeText(getApplicationContext(), "Se modificó la contraseña", Toast.LENGTH_LONG).show();
-                        button.setEnabled(false);
-                        button1.setEnabled(false);
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Error al modificar", Toast.LENGTH_LONG).show();
-                    }
-
-                }
-            }
-        });
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String usr= String.valueOf(editText.getText());
-                String contra = String.valueOf(editText1.getText());
-                if(usr.equals("")||contra.equals("")){
-                    Toast.makeText(getApplicationContext(), "Llena los campos", Toast.LENGTH_LONG).show();
-                }else{
-                    MyData myData = new MyData();
-                    myData.setContra(contra);
-                    myData.setUsuario(usr);
-                    myData.setId_usr(myInfo.getId_usr());
-                    Toast.makeText(getApplicationContext(), String.valueOf(myInfo.getId_usr()), Toast.LENGTH_LONG).show();
-                    DbContras dbContras = new DbContras(principal.this);
-                    long id=dbContras.saveContra(myData);
-                    if (id > 0){
-                        listo=dbContras.getContras(myInfo.getId_usr());
-                        MyAdapter myAdapter = new MyAdapter(listo, getBaseContext());
-                        listView.setAdapter(myAdapter);
-                        editText.setText("");
-                        editText1.setText("");
-                        Toast.makeText(getApplicationContext(), myData.getUsuario()+" "+myData.getContra(), Toast.LENGTH_LONG).show();
-                        Toast.makeText(principal.this, "Guardado con éxito",Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(principal.this, "No se ha podido guardar",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -180,49 +110,51 @@ public class principal extends AppCompatActivity {
         menuInflater.inflate(R.menu.menu ,  menu);
         return flag;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item)
     {
-        int id = item.getItemId();
-        if(id==R.id.item1){
-            String usr= String.valueOf(editText.getText());
-            String contra = String.valueOf(editText1.getText());
-            if(usr.equals("")||contra.equals("")){
-                Toast.makeText(getApplicationContext(), "Llena los campos", Toast.LENGTH_LONG).show();
-            }else{
-                MyData myData = new MyData();
-                myData.setContra(contra);
-                myData.setUsuario(usr);
-                myData.setId_usr(myInfo.getId_usr());
-                Toast.makeText(getApplicationContext(), String.valueOf(myInfo.getId_usr()), Toast.LENGTH_LONG).show();
-                DbContras dbContras = new DbContras(principal.this);
-                long p=dbContras.saveContra(myData);
-                if (p > 0){
-                    listo=dbContras.getContras(myInfo.getId_usr());
-                    MyAdapter myAdapter = new MyAdapter(listo, getBaseContext());
-                    listView.setAdapter(myAdapter);
-                    editText.setText("");
-                    editText1.setText("");
-                    Toast.makeText(getApplicationContext(), myData.getUsuario()+" "+myData.getContra(), Toast.LENGTH_LONG).show();
-                    Toast.makeText(principal.this, "Guardado con éxito",Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(principal.this, "No se ha podidio guardar",Toast.LENGTH_LONG).show();
-                }
-            }
-
+        MyInfo info = null;
+        Object object = null;
+        Intent intent = getIntent();
+        object = intent.getExtras().get("MyInfo");
+        info = (MyInfo) object;
+        switch (item.getItemId() ) {
+            case R.id.item1:
+                Intent olvideContra = new Intent(principal.this, agregapass.class);
+                olvideContra.putExtra("MyInfo", info);
+                startActivity(olvideContra);
+                break;
+            case R.id.item2:
+                Intent elimContra = new Intent(principal.this, eliminapass.class);
+                elimContra.putExtra("MyInfo", info);
+                startActivity(elimContra);
+                break;
+            case R.id.item3:
+                Intent editaContra = new Intent(principal.this, editapass.class);
+                editaContra.putExtra("MyInfo", info);
+                startActivity(editaContra);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        if(id==R.id.item2){
-            Toast.makeText(getApplicationContext(), "Es un secreto", Toast.LENGTH_LONG).show();
-            Intent intent= new Intent(principal.this,Api.class);
-            startActivity(intent);
-            return true;
-        }
-        if(id==R.id.item3){
-            Intent intent= new Intent(principal.this,login_activity.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return false;
+    }
+    private void toast( int i )
+    {
+        MyInfo info = null;
+        Object object = null;
+        Intent intent = getIntent();
+        object = intent.getExtras().get("MyInfo");
+        info = (MyInfo) object;
+        Toast.makeText(getBaseContext(), list.get(i).getContra(), Toast.LENGTH_SHORT).show();
+        String Latitud = list.get(i).getLatitud();
+        String Longitud = list.get(i).getLongitud();
+        Intent mapa = new Intent(principal.this,mapa.class);
+        mapa.putExtra("MyInfo",info);
+        mapa.putExtra("Latitud",Latitud);
+        mapa.putExtra("Longitud",Longitud);
+        startActivity(mapa);
     }
 
 }

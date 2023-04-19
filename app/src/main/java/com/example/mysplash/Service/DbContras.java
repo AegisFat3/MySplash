@@ -8,34 +8,35 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+
 import com.example.mysplash.contract.UsuariosContract;
 import com.example.mysplash.json.MyData;
-import com.example.mysplash.json.MyInfo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DbContras extends UsuariosDBService{
     Context context;
+
     public DbContras(@Nullable Context context) {
         super(context);
         this.context=context;
     }
-    public long saveContra(MyData myData){
-        long id = 0;
+    public Boolean saveContra(MyData myData){
+        Boolean correcto = false;
         try{
             UsuariosDBService usuariosDBService = new UsuariosDBService(context);
             SQLiteDatabase db =usuariosDBService.getWritableDatabase();
-
             ContentValues values= new ContentValues();
-            id = db.insert(TABLE_CONTRA,null, UsuariosContract.MyDataEntry.toContentValues(myData));
+            db.insert(TABLE_CONTRA,null, UsuariosContract.MyDataEntry.toContentValues(myData));
+            correcto = true;
 
         }catch(Exception ex){
             ex.toString();
+            correcto = false;
         }
         finally{
-            return id;
+            return correcto;
         }
 
     }
@@ -46,79 +47,65 @@ public class DbContras extends UsuariosDBService{
         List<MyData>contras = null;
         MyData myData = null;
         sqLiteDatabase = getReadableDatabase();
-        cursor = sqLiteDatabase.rawQuery("SELECT*FROM " + TABLE_CONTRA +" WHERE id = "+id,null);
+        cursor = sqLiteDatabase.rawQuery("SELECT*FROM " + TABLE_CONTRA +" WHERE id = "+id+" "  ,null);
         if( cursor == null )
         {
-            return new ArrayList<MyData>();
+            return null;
         }
         if( cursor.getCount() < 1)
         {
-            return new ArrayList<MyData>();
+            return null;
         }
         if( !cursor.moveToFirst() )
         {
-            return new ArrayList<MyData>();
+            return null;
         }
-        Log.d(TAG, "" + cursor.getCount());
+        Log.d(TAG, "Cursor" + cursor.getCount());
         contras = new ArrayList<MyData>( );
         for( int i = 0; i < cursor.getCount(); i++)
         {
             myData = new MyData( );
-            myData.setId_contra(cursor.getInt(0));
+            myData.setId_usr(cursor.getInt(0));
             myData.setContra(cursor.getString(1));
             myData.setUsuario(cursor.getString(2));
-            myData.setId_usr(cursor.getInt(3));
+            myData.setId_contra(cursor.getInt(3));
+            myData.setImage(cursor.getInt(4));
+            myData.setData(cursor.getBlob(5));
+            myData.setLatitud(cursor.getString(6));
+            myData.setLongitud(cursor.getString(7));
             contras.add(myData);
             cursor.moveToNext( );
         }
-        Log.d("Contraseñas",contras.toString());
         return contras;
     }
-    public boolean AlterContra(String sitio,String contra,int id,int id_contra){
+    public boolean editaContras(int id, int imagen, String contra, String red){
         boolean correcto = false;
-        UsuariosDBService usuariosDBService = new UsuariosDBService(context);
-        SQLiteDatabase db =usuariosDBService.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("contra",contra);
-        values.put("user_c",sitio);
+        SQLiteDatabase sqLiteDatabase = null;
+        sqLiteDatabase = getWritableDatabase();
         try{
-            db.execSQL("UPDATE " + TABLE_CONTRA + " SET contra = '" + contra + "', user_c = '" +sitio+ "' WHERE id = '" + id + "' AND id_contra = '" +id_contra+ "'");
+            sqLiteDatabase.execSQL("UPDATE "+TABLE_CONTRA+" SET contra = '"+contra+"', user_c = '"+red+"' WHERE imagen = '"+imagen+"' and id ='"+id+"'");
             correcto = true;
-        }catch(Exception ex){
-            ex.toString();
-            correcto=false;
-        } finally {
-            db.close();
-        }
-        return correcto;
-    }
-
-    public boolean eliminarContacto(int id,String sitio,String contra) {
-
-        boolean correcto = false;
-
-        UsuariosDBService dbHelper = new UsuariosDBService(context);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        try {
-            db.execSQL("DELETE FROM " + TABLE_CONTRA+ " WHERE id = '" + id + "' AND contra ='" +contra+ "' AND user_c = '" +sitio+ "'");
-            correcto = true;
-        } catch (Exception ex) {
+        }catch (Exception ex){
             ex.toString();
             correcto = false;
-        } finally {
-            db.close();
+        }finally {
+            sqLiteDatabase.close();
         }
-
         return correcto;
     }
-    public void AlterContraS(String sitio,String contra,int id,int id_contra){
-        UsuariosDBService usuariosDBService = new UsuariosDBService(context);
-        SQLiteDatabase db =usuariosDBService.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put("contra",contra);
-        values.put("user_c",sitio);
+    public boolean eliminaContra(String Contra, int id){
+        boolean correcto = false;
+        SQLiteDatabase sqLiteDatabase = null;
+        sqLiteDatabase = getWritableDatabase();
+        try{
+            sqLiteDatabase.execSQL("DELETE FROM "+TABLE_CONTRA+" WHERE contra ='"+Contra+"' and id = '"+id+"'");
+        }catch (Exception ex){
+            ex.toString();
+            correcto = false;
+        }finally {
+            sqLiteDatabase.close();
+        }
+        return correcto;
     }
 
 }

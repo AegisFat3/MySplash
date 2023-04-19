@@ -42,7 +42,7 @@ public class login_activity extends AppCompatActivity {
     public String correo;
     public String mensaje;
     public static List<MyInfo> list;
-    public static String TAG = "mensaje";
+    public static String TAG = "Login";
     public static String TOG = "error";
     public static String json = null;
     public static String usr,pswd;
@@ -96,7 +96,7 @@ public class login_activity extends AppCompatActivity {
                 if(myInfo.getContrasena().equals(pswd)){
                     Toast.makeText(getApplicationContext(), "Inicio de sesión exitoso", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(login_activity.this, principal.class);
-                    intent.putExtra("Objeto", myInfo);
+                    intent.putExtra("MyInfo", myInfo);
                     startActivity(intent);
 
                 }else{
