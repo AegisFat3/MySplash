@@ -66,7 +66,7 @@ public class principal extends AppCompatActivity {
                 if (object != null) {
                     if (object instanceof MyInfo) {
                         info = (MyInfo) object;
-                        usuario.setText("Bienvenido, " + info.getUser());
+                        usuario.setText("Hola, " + info.getUser());
                         idusu = info.getId_usr();
                         Log.d("Id usu", String.valueOf(idusu));
                         list = contrasbd.getContras(idusu);

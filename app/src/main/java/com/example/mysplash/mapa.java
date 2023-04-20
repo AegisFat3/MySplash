@@ -68,7 +68,7 @@ public class mapa extends AppCompatActivity implements OnMapReadyCallback, Googl
         lat = findViewById(R.id.Lat);
         lon = findViewById(R.id.Long);
         lat.setText("Latitud: "+latitud);
-        lon.setText("Longitud"+longitud);
+        lon.setText("Longitud: "+longitud);
         LatLng mexico = new LatLng(Double.parseDouble(latitud),Double.parseDouble(longitud));
         mMap.addMarker(new MarkerOptions().position(mexico).title("ubicacion"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(mexico));
