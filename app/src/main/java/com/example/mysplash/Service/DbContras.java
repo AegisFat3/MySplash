@@ -47,7 +47,7 @@ public class DbContras extends UsuariosDBService{
         List<MyData>contras = null;
         MyData myData = null;
         sqLiteDatabase = getReadableDatabase();
-        cursor = sqLiteDatabase.rawQuery("SELECT*FROM " + TABLE_CONTRA +" WHERE id = "+id+" "  ,null);
+        cursor = sqLiteDatabase.rawQuery("SELECT*FROM " + TABLE_CONTRA +" WHERE idusu = "+id+" "  ,null);
         if( cursor == null )
         {
             return null;
@@ -83,7 +83,7 @@ public class DbContras extends UsuariosDBService{
         SQLiteDatabase sqLiteDatabase = null;
         sqLiteDatabase = getWritableDatabase();
         try{
-            sqLiteDatabase.execSQL("UPDATE "+TABLE_CONTRA+" SET contra = '"+contra+"', user_c = '"+red+"' WHERE imagen = '"+imagen+"' and id ='"+id+"'");
+            sqLiteDatabase.execSQL("UPDATE "+TABLE_CONTRA+" SET contra = '"+contra+"', user_c = '"+red+"' WHERE imagen = '"+imagen+"' and idusu ='"+id+"'");
             correcto = true;
         }catch (Exception ex){
             ex.toString();
@@ -98,7 +98,7 @@ public class DbContras extends UsuariosDBService{
         SQLiteDatabase sqLiteDatabase = null;
         sqLiteDatabase = getWritableDatabase();
         try{
-            sqLiteDatabase.execSQL("DELETE FROM "+TABLE_CONTRA+" WHERE contra ='"+Contra+"' and id = '"+id+"'");
+            sqLiteDatabase.execSQL("DELETE FROM "+TABLE_CONTRA+" WHERE contra ='"+Contra+"' and idusu = '"+id+"'");
         }catch (Exception ex){
             ex.toString();
             correcto = false;

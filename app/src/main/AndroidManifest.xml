@@ -23,6 +23,9 @@
         <activity
             android:name=".mapa"
             android:exported="false" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyALiP2r8tdF0vSt_ywgbiZUggW5bTffb4w" />
         <activity
             android:name=".eliminapass"
             android:exported="false" />

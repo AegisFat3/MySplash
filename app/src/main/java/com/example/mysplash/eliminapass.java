@@ -39,7 +39,8 @@ public class eliminapass extends AppCompatActivity {
     private ListView listView;
     private EditText contra2, red;
     private TextView contrasena, red2;
-    private int []images = { R.drawable.battle};
+    private int []images = { R.drawable.battle,R.drawable.epicgames,R.drawable.origin, R.drawable.stadia, R.drawable.ps,
+            R.drawable.xbox, R.drawable.nins, R.drawable.uplay, R.drawable.gogcom, R.drawable.steam};
 
 
     @Override
@@ -142,7 +143,7 @@ public class eliminapass extends AppCompatActivity {
         contrasbd = new DbContras(getBaseContext());
         contrasbd.eliminaContra(lista.get(i).getContra(), lista.get(i).getId_contra());
         lista.remove(i);
-        Toast.makeText(getBaseContext(),"eliminado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(),"Aniquilado", Toast.LENGTH_SHORT).show();
         return lista.size();
     }
 }

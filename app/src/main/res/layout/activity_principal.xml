@@ -66,28 +66,4 @@
         app:layout_constraintTop_toBottomOf="@+id/listViewId"
         app:layout_constraintVertical_bias="0.161" />
 
-    <Button
-        android:id="@+id/config"
-        android:layout_width="174dp"
-        android:layout_height="46dp"
-        android:text="Ver API"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:layout_constraintVertical_bias="0.474" />
-
-    <Button
-        android:id="@+id/Csesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cerrar sesion"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/config"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.954" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

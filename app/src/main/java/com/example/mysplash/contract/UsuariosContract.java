@@ -62,11 +62,11 @@ public class UsuariosContract implements Serializable {
                     "id_contra INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "contra TEXT NOT NULL," +
                     "user_c TEXT NOT NULL," +
+                    "idusu INTEGER NOT NULL," +
                     "imagen INTEGER NOT NULL," +
                     "data BLOB," +
                     "latitud TEXT NOT NULL," +
-                    "longitud TEXT NOT NULL" +
-                    "id INTEGER NOT NULL)";
+                    "longitud TEXT NOT NULL)";
             return table;
         }
         public static ContentValues toContentValues(MyData myData)
@@ -74,11 +74,12 @@ public class UsuariosContract implements Serializable {
             ContentValues values = new ContentValues();
             values.put("contra", myData.getContra());
             values.put("user_c", myData.getUsuario());
+            values.put("idusu", myData.getId_contra());
             values.put("imagen", myData.getImage());
             values.put("data", myData.getData());
             values.put("latitud",myData.getLatitud());
             values.put("longitud",myData.getLongitud());
-            values.put("id", myData.getId_usr());
+
 
             return values;
         }

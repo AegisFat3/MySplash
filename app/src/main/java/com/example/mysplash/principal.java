@@ -31,7 +31,8 @@ public class principal extends AppCompatActivity {
     private ListView listView;
     private List<MyData> list;
     public static String TAG = "Menu";
-    private int []images = { R.drawable.battle};
+    private int []images = { R.drawable.battle,R.drawable.epicgames,R.drawable.origin, R.drawable.stadia, R.drawable.ps,
+            R.drawable.xbox, R.drawable.nins, R.drawable.uplay, R.drawable.gogcom, R.drawable.steam};
 
 
     @Override
@@ -45,25 +46,12 @@ public class principal extends AppCompatActivity {
         MyData myData = null;
         DbContras contrasbd = null;
         contrasbd = new DbContras(getBaseContext());
-        api = findViewById(R.id.config);
-        Csesion = findViewById(R.id.Csesion);
+        //api = findViewById(R.id.config);
+        //Csesion = findViewById(R.id.Csesion);
         usuario = findViewById(R.id.textUser);
         Intent intent = getIntent();
         listView = (ListView) findViewById(R.id.listViewId);
-        Csesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(principal.this, login_activity.class);
-                startActivity(intent);
-            }
-        });
-        api.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(principal.this, Api.class);
-                startActivity(intent);
-            }
-        });
+
 
         list = new ArrayList<MyData>();
         if( intent != null)
@@ -78,12 +66,12 @@ public class principal extends AppCompatActivity {
                 if (object != null) {
                     if (object instanceof MyInfo) {
                         info = (MyInfo) object;
-                        usuario.setText("Bienvenido " + info.getUser() + " de edad " + info.getEdad());
+                        usuario.setText("Bienvenido, " + info.getUser());
                         idusu = info.getId_usr();
                         Log.d("Id usu", String.valueOf(idusu));
                         list = contrasbd.getContras(idusu);
                         if(list == null){
-                            Toast.makeText(getBaseContext(), "No hay contras", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "Sin registros", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -134,6 +122,14 @@ public class principal extends AppCompatActivity {
                 Intent editaContra = new Intent(principal.this, editapass.class);
                 editaContra.putExtra("MyInfo", info);
                 startActivity(editaContra);
+                break;
+            case R.id.item4:
+                Intent intent20 = new Intent(principal.this, Api.class);
+                startActivity(intent20);
+                break;
+            case R.id.item5:
+                Intent intent30 = new Intent(principal.this, login_activity.class);
+                startActivity(intent30);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

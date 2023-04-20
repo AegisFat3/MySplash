@@ -39,7 +39,8 @@ public class editapass extends AppCompatActivity {
     private ListView listView;
     private EditText contra, red;
     private TextView indice;
-    private int []images = { R.drawable.battle};
+    private int []images = { R.drawable.battle,R.drawable.epicgames,R.drawable.origin, R.drawable.stadia, R.drawable.ps,
+            R.drawable.xbox, R.drawable.nins, R.drawable.uplay, R.drawable.gogcom, R.drawable.steam};;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +90,9 @@ public class editapass extends AppCompatActivity {
                 lista.get(i).setUsuario(String.valueOf(red.getText()));
                 //List<MyInfo> list =new ArrayList<MyInfo>();
                 if(contrasbd.editaContras((info.getId_usr()), lista.get(i).getImage(), String.valueOf(contra.getText()),String.valueOf(red.getText()))){
-                    Log.d(TAG, "Contraseña editada");
+                    Log.d(TAG, "Registro editado");
                 }else{
-                    Log.d(TAG, "Contraseña no editada");
+                    Log.d(TAG, "Registro no editado");
                 }
                 info.setContras(lista);
                 //List2Json(info,list);

@@ -56,8 +56,9 @@ public class agregapass extends AppCompatActivity implements LocationListener{
     private LocationManager locationManager;
     TextView lat,lon;
     public static final String KEY = "+4xij6jQRSBdCymMxweza/uMYo+o0EUg";
-    private TextView contrasena, red2;
-    private int []images = {R.drawable.battle};
+    private TextView contrasena, usuario2;
+    private int []images = { R.drawable.battle,R.drawable.epicgames,R.drawable.origin, R.drawable.stadia, R.drawable.ps,
+            R.drawable.xbox, R.drawable.nins, R.drawable.uplay, R.drawable.gogcom, R.drawable.steam};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class agregapass extends AppCompatActivity implements LocationListener{
         usuario = findViewById(R.id.red);
         contra2 = findViewById(R.id.nuevacontra);
         contrasena = findViewById(R.id.nuevacontra);
-        red2 = findViewById(R.id.red);
+        usuario2 = findViewById(R.id.red);
         lat = findViewById(R.id.latitud);
         lon = findViewById(R.id.longitud);
         imagenF = findViewById(R.id.imagenFoto);

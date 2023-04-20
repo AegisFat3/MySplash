@@ -116,16 +116,13 @@ public class login_activity2 extends AppCompatActivity {
                 }
 
                 // Inicia la actividad de la aplicación
+                MyInfo myInfo2 = dbUsuarios.GetUsuario(usuario);
                 Intent intent = new Intent(login_activity2.this, principal.class);
+                intent.putExtra("MyInfo", myInfo2);
                 startActivity(intent);
                 finish();
             }
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        dbUsuarios.close();
-        super.onDestroy();
-    }
 }
